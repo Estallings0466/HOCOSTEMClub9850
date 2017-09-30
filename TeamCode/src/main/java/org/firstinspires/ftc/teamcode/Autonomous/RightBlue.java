@@ -1,5 +1,8 @@
 package org.firstinspires.ftc.teamcode.Autonomous;
+
+import com.qualcomm.hardware.lynx.LynxI2cColorRangeSensor;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -7,20 +10,22 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import static com.qualcomm.robotcore.hardware.configuration.BuiltInConfigurationType.COLOR_SENSOR;
-
 /**
- * Created by emmab on 9/15/2017.
+ * Created by emmab on 9/28/2017.
  */
-@Autonomous (name = "Octopus Autonomous", group = "Red")
-public class AutonomousOcto extends LinearOpMode {
+@Autonomous (name = "RightBlue", group = "Blue")
+@Disabled
+public class RightBlue extends LinearOpMode {
 
     DcMotor Front_Left;
     DcMotor Front_Right;
     DcMotor Back_Left;
     DcMotor Back_Right;
+   // DcMotor Glyph_Lift;
     ColorSensor Color_Sensor;
     Servo Jewel_Arm;
+   // Servo Left_Grabber;
+    //Servo Right_Grabber;
 
     private ElapsedTime runtime = new ElapsedTime();
     private ElapsedTime timeAfterReset = new ElapsedTime();
@@ -29,9 +34,11 @@ public class AutonomousOcto extends LinearOpMode {
         Front_Left = hardwareMap.dcMotor.get("FL");
         Front_Right = hardwareMap.dcMotor.get("FR");
         Back_Left = hardwareMap.dcMotor.get("BL");
-        Back_Right = hardwareMap.dcMotor.get("BR");
+       // Glyph_Lift = hardwareMap.dcMotor.get("GL");
         Color_Sensor = hardwareMap.colorSensor.get("CS");
         Jewel_Arm = hardwareMap.servo.get("JA");
+       // Left_Grabber = hardwareMap.servo.get("LG");
+       // Right_Grabber = hardwareMap.servo.get("RG");
 
         Front_Left.setDirection(DcMotorSimple.Direction.REVERSE);
         Back_Left.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -69,40 +76,30 @@ public class AutonomousOcto extends LinearOpMode {
         Jewel_Arm.setPosition(1);
         sleep(2000);
 
-        if (Color_Sensor.red() >= 6 && Color_Sensor.blue() == 0) {
-            driveForward(1);
+        if (Color_Sensor.red() >= 4 && Color_Sensor.blue() >= 0) {
+            driveBackward(1);
 
             sleep(500);
         } else {
-           driveBackward(1);
+            driveForward(1);
 
             sleep(500);
         }
 
-    }
-
-    private void driveByTime(double v, double v1) {
-    }
-
-
-
-
-    public void down(double down) throws InterruptedException {
-        //May combine this with scan, not sure...but this is where teh slidey thing hits the ball
+        Jewel_Arm.setPosition(0);
 
     }
 
-    public void turn(double turn) throws InterruptedException {
+
+    public void close(double close) throws InterruptedException {
+        //close the two servos around the glyph
+    }
+
+    public void rise(double rise) throws InterruptedException {
         //gotta turn at some point, so we'll make it turn
     }
 
-    public void arm(double arm) throws InterruptedException {
-        //Gonna change name, this is for the arm thing that puts the glyph down
-    }
 
-    public void stopmotors(long stopmotors) throws InterruptedException {
-        //just stop motion and stuff
-    }
 
     //The above is all we'll need for now, we can add more as the plan develops more
 
@@ -115,11 +112,13 @@ public class AutonomousOcto extends LinearOpMode {
         //patiently waiting
         waitForStart();
         if (opModeIsActive()) {
+
             sleep(100);
-            senseRed(1);
+            //servos close around glyph
+            senseRed(1); //servo arm is lowered, color sensor scans for red/blue, moves in certain direction,lifts servo arm
+            //drives forward
 
         }
 
     }
 }
-
