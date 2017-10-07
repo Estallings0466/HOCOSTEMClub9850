@@ -7,10 +7,6 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import java.io.Console;
-
-import static com.qualcomm.robotcore.hardware.configuration.BuiltInConfigurationType.COLOR_SENSOR;
-
 /**
  * Created by emmab on 9/15/2017.
  */
@@ -23,9 +19,6 @@ public class RightRed extends LinearOpMode {
     DcMotor Back_Right;
     ColorSensor Color_Sensor;
     Servo Jewel_Arm;
-
-    private ElapsedTime runtime = new ElapsedTime();
-    private ElapsedTime timeAfterReset = new ElapsedTime();
 
     public void hardwareMapping() {
         Front_Left = hardwareMap.dcMotor.get("FL");
@@ -41,10 +34,10 @@ public class RightRed extends LinearOpMode {
     }
 
     public void driveForward(double driveForward) throws InterruptedException {
-        Front_Left.setPower(1);
-        Front_Right.setPower(1);
-        Back_Left.setPower(1);
-        Back_Right.setPower(1 );
+        Front_Left.setPower(.2);
+        Front_Right.setPower(.2);
+        Back_Left.setPower(.2);
+        Back_Right.setPower(.2);
 
         sleep(1000);
         Front_Left.setPower(0);
@@ -54,10 +47,10 @@ public class RightRed extends LinearOpMode {
     }
 
     public void driveBackward(long backward) throws InterruptedException {
-        Front_Left.setPower(-1);
-        Front_Right.setPower(-1);
-        Back_Left.setPower(-1);
-        Back_Right.setPower(-1 );
+        Front_Left.setPower(-.2);
+        Front_Right.setPower(-.2);
+        Back_Left.setPower(-.2);
+        Back_Right.setPower(-.2);
 
         sleep(1000);
         Front_Left.setPower(0);
@@ -72,36 +65,24 @@ public class RightRed extends LinearOpMode {
         sleep(2000);
 
         if (Color_Sensor.red() >= 4 ) {
-            driveForward(2);
+            turnright(2);
+            sleep(1000);
             Jewel_Arm.setPosition(1);
             sleep(500);
         } else {
-           driveBackward(1);
+           turnleft(1);
+            sleep(1000);
             Jewel_Arm.setPosition(1);
             sleep(500);
         }
 
-
-
-    }
-
-    private void drive(double v, double v1) {
-
-    }
-
-
-
-
-    public void down(double down) throws InterruptedException {
-        //May combine this with scan, not sure...but this is where teh slidey thing hits the ball
-
     }
 
     public void turnleft(double turnleft) throws InterruptedException {
-        Front_Left.setPower(-1);
-        Front_Right.setPower(1);
-        Back_Left.setPower(-1);
-        Back_Right.setPower(1 );
+        Front_Left.setPower(-.1);
+        Front_Right.setPower(.1);
+        Back_Left.setPower(-.1);
+        Back_Right.setPower(.1);
 
         sleep(1000);
         Front_Left.setPower(0);
@@ -111,30 +92,48 @@ public class RightRed extends LinearOpMode {
     }
 
     public void turnright(double turnright) throws InterruptedException{
-        Front_Left.setPower(1);
-        Front_Right.setPower(-1);
-        Back_Left.setPower(1);
-        Back_Right.setPower(-1 );
+        Front_Left.setPower(.1);
+        Front_Right.setPower(-.1);
+        Back_Left.setPower(.1);
+        Back_Right.setPower(-.1);
 
         sleep(1000);
         Front_Left.setPower(0);
         Front_Right.setPower(0);
         Back_Left.setPower(0);
         Back_Right.setPower(0);
-    }
+        }
 
-    public void arm(double arm) throws InterruptedException {
-        //Gonna change name, this is for the arm thing that puts the glyph down
-    }
+public void driveBackward_Slo(double backward_slo) throws InterruptedException {
+    Front_Left.setPower(-.1);
+    Front_Right.setPower(-.1);
+    Back_Left.setPower(-.1);
+    Back_Right.setPower(-.1);
 
-    public void stopmotors(long stopmotors) throws InterruptedException {
-        //just stop motion and stuff
-    }
+    sleep(1000);
+    Front_Left.setPower(0);
+    Front_Right.setPower(0);
+    Back_Left.setPower(0);
+    Back_Right.setPower(0);
+        }
 
-    //The above is all we'll need for now, we can add more as the plan develops more
+public void driveForward_Slo(long forward_slo) throws InterruptedException {
+    Front_Left.setPower(.1);
+    Front_Right.setPower(.1);
+    Back_Left.setPower(.1);
+    Back_Right.setPower(.1);
 
-    @Override
-    public void runOpMode() throws InterruptedException {
+    sleep(1000);
+    Front_Left.setPower(0);
+    Front_Right.setPower(0);
+    Back_Left.setPower(0);
+    Back_Right.setPower(0);
+        }
+
+//The above is all we'll need for now, we can add more as the plan develops more
+
+@Override
+public void runOpMode() throws InterruptedException {
         //gotta let names be known...
         hardwareMapping();
 
@@ -144,9 +143,12 @@ public class RightRed extends LinearOpMode {
         if (opModeIsActive()) {
             sleep(100);
             senseRed(1);
+            driveBackward_Slo(.2);
+            turnleft(2);
+
 
         }
 
-    }
+     }
 }
 
