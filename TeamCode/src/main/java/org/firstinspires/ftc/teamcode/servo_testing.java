@@ -39,6 +39,8 @@ public class servo_testing extends OpMode {
         Left.setPosition(Lclaw);
         Right.setPosition(Rclaw);
         //RelicArm.setPower(relicarm);
+
+        Right.setDirection(Servo.Direction.REVERSE);
     }
 
 
