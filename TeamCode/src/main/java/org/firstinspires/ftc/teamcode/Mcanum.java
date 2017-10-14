@@ -53,10 +53,10 @@ public class Mcanum extends OpMode {
         RelicArm = hardwareMap.dcMotor.get("relic_arm");
         Left = hardwareMap.servo.get("left_claw");
         Right = hardwareMap.servo.get("right_claw");
-        North = hardwareMap.dcMotor.get("motor North");
-        South = hardwareMap.dcMotor.get("motor South");
-        East = hardwareMap.dcMotor.get("motor East");
-        West = hardwareMap.dcMotor.get("motor West");
+        North = hardwareMap.dcMotor.get("motor North");// top left wheel
+        South = hardwareMap.dcMotor.get("motor South");//back right wheel
+        East = hardwareMap.dcMotor.get("motor East");// top right wheel
+        West = hardwareMap.dcMotor.get("motor West");//back left wheel
         //These work without reversing (Tetrix motors).
         //AndyMark motors may be opposite, in which case uncomment these lines:
         //motorFrontLeft.setDirection(DcMotor.Direction.REVERSE);
@@ -101,6 +101,8 @@ public class Mcanum extends OpMode {
         Left.setPosition(Lclaw);
         Right.setPosition(Rclaw);
         RelicArm.setPower(relicarm);
+
+        Right.setDirection(Servo.Direction.REVERSE);
 
 
       /*
