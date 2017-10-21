@@ -1,15 +1,16 @@
 package org.firstinspires.ftc.teamcode;
 
 
-        import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-        import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-        import com.qualcomm.robotcore.hardware.DcMotor;
-        import com.qualcomm.robotcore.hardware.Servo;
-        import com.qualcomm.robotcore.util.Range;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.Range;
 
 
 /*
-   Holonomic concepts from:000
+   Holonomic concepts from:
    http://www.vexforum.com/index.php/12370-holonomic-drives-2-0-a-video-tutorial-by-cody/0
    Robot wheel mapping:
           X FRONT X
@@ -22,26 +23,26 @@ package org.firstinspires.ftc.teamcode;
         X           X
           X       X
 */
-@TeleOp(name = "Octomec1", group = "Octomec1")
+@TeleOp(name = "Main Manual", group = "Mcanum Program")
 //@Disabled
-public class Mcanum extends OpMode {
+public class ProMecanum1 extends OpMode {
 
-  //  DcMotor RelicArm;
-    //Servo JA;
-    Servo Left;
-    Servo Right;
-    DcMotor North;
-    DcMotor South;
-    DcMotor East;
-    DcMotor West;
-  //  Servo RelicClaw;
-    DcMotor GlyphChain;
-   // Servo SwivelClaw;
+    //  DcMotor Relic_Arm;
+    //Servo Jewel_Arm;
+    Servo Left_Claw;
+    Servo Right_Claw;
+    DcMotor Front_Left;
+    DcMotor Back_Right;
+    DcMotor Front_Right;
+    DcMotor Back_Left;
+    //  Servo Relic_Claw;
+    DcMotor Glyph_lift;
+    // Servo SwivelClaw;
 
     /**
      * Constructor
      */
-    public Mcanum() {
+    public ProMecanum1() {
 
     }
 
@@ -54,16 +55,16 @@ public class Mcanum extends OpMode {
        * that the names of the devices must match the names used when you
        * configured your robot and created the configuration file.
        */
-       // RelicArm = hardwareMap.dcMotor.get("relic_arm");
-       // RelicClaw = hardwareMap.servo.get("relic_claw");
-        Left = hardwareMap.servo.get("left_claw");
-        Right = hardwareMap.servo.get("right_claw");
-        North = hardwareMap.dcMotor.get("motor North");
-        South = hardwareMap.dcMotor.get("motor South");
-       East = hardwareMap.dcMotor.get("motor East");
-        West = hardwareMap.dcMotor.get("motor West");
-        GlyphChain = hardwareMap.dcMotor.get("glyph_chain");
-        //JA = hardwareMap.servo.get("JewelA");
+        // RelicArm = hardwareMap.dcMotor.get("relic_arm");
+        // RelicClaw = hardwareMap.servo.get("relic_claw");
+        Left_Claw = hardwareMap.servo.get("LC");
+        Right_Claw = hardwareMap.servo.get("RC");
+        Front_Left = hardwareMap.dcMotor.get("FL");
+        Back_Right = hardwareMap.dcMotor.get("BR");
+        Front_Right = hardwareMap.dcMotor.get("FR");
+        Back_Left = hardwareMap.dcMotor.get("BL ");
+        Glyph_lift = hardwareMap.dcMotor.get("GL");
+        //Jewel_Arm = hardwareMap.servo.get("JA");
         //SwivelClaw = hardwareMap.servo.get("swivel_claw");
         //These work without reversing (Tetrix motors).
         //AndyMark motors may be opposite, in which case uncomment these lines:
@@ -71,9 +72,10 @@ public class Mcanum extends OpMode {
         //motorBackLeft.setDirection(DcMotor.Direction.REVERSE);
         //motorFrontRight.setDirection(DcMotor.Direction.REVERSE);
         //motorBackRight.setDirection(DcMotor.Direction.REVERSE);
-        Left.setDirection(Servo.Direction.REVERSE);
-        Right.setDirection(Servo.Direction.REVERSE);
-        //JA.setDirection(Servo.Direction.REVERSE);
+        Left_Claw.setDirection(Servo.Direction.REVERSE);
+        Right_Claw.setDirection(Servo.Direction.REVERSE);
+        Glyph_lift.setDirection(DcMotorSimple.Direction.REVERSE);
+        //Jewel_Arm.setDirection(Servo.Direction.FORWARD);
         //reverse lifts autonomous arm up
 
     }
@@ -85,20 +87,20 @@ public class Mcanum extends OpMode {
         // left stick controls direction
         // right stick X controls rotation
 
-        float gamepad1LeftY = -gamepad1.left_stick_y;
+        float gamepad1LeftY = gamepad1.left_stick_y;
         float gamepad1LeftX = gamepad1.left_stick_x;
         float gamepad1RightX = gamepad1.right_stick_x;
-        float Lclaw = gamepad2.left_stick_y;
-        float Rclaw = gamepad2.left_stick_y;
-        float Claw = gamepad2.right_trigger;
-        float Arm = gamepad2.right_stick_x;
-        float Chain = gamepad2.right_stick_y;
-       // float Swivel = gamepad2.left_trigger;
-        //float JewelA = gamepad1.right_trigger;
+        float Lclaw = gamepad2.left_trigger;
+        float Rclaw = gamepad2.left_trigger;
+        //  float Claw = gamepad2.right_trigger;
+        //  float Arm = gamepad2.left_stick_y;
+        float Slide = gamepad2.right_stick_y;
+        // float Swivel = gamepad2.left_trigger;
+
 
         // holonomic formulas
 
-       float FrontLeft = -gamepad1LeftY - gamepad1LeftX - gamepad1RightX;
+        float FrontLeft = -gamepad1LeftY - gamepad1LeftX - gamepad1RightX;
         float FrontRight = gamepad1LeftY - gamepad1LeftX - gamepad1RightX;
         float BackRight = gamepad1LeftY + gamepad1LeftX - gamepad1RightX;
         float BackLeft = -gamepad1LeftY + gamepad1LeftX - gamepad1RightX;
@@ -110,26 +112,26 @@ public class Mcanum extends OpMode {
         BackRight = Range.clip(BackRight, -1, 1);
 
         // write the values to the motors
-        North.setPower(FrontRight);
-        South.setPower(FrontLeft);
-        East.setPower(BackLeft);
-        West.setPower(BackRight);
-        Left.setPosition(Lclaw);
-        Right.setPosition(Rclaw);
-        //RelicArm.setPower(Arm);
-       // RelicClaw.setPosition(Claw);
-        GlyphChain.setPower(Chain);
-       // SwivelClaw.setPosition(Swivel);
-        Right.setDirection(Servo.Direction.FORWARD);
+        Front_Left.setPower(FrontLeft);
+        Back_Right.setPower(BackRight);
+        Front_Right.setPower(FrontRight);
+        Back_Left.setPower(BackLeft);
+        Left_Claw.setPosition(Lclaw);
+        Right_Claw.setPosition(Rclaw);
+        //  RelicArm.setPower(Arm);
+        //  RelicClaw.setPosition(Claw);
+        Glyph_lift.setPower(Slide);
+        //  SwivelClaw.setPosition(Swivel);
+        Right_Claw.setDirection(Servo.Direction.FORWARD);
 
 
       /*
        * Telemetry for debugging
        */
         telemetry.addData("Text", "*** Robot Data***");
-        telemetry.addData("Joy XL YL XR",  String.format("%.2f", gamepad1LeftX) + " " +
-                String.format("%.2f", gamepad1LeftY) + " " +  String.format("%.2f", gamepad1RightX));
-        telemetry.addData("f left pwr",  "front left  pwr: " + String.format("%.2f", FrontLeft));
+        telemetry.addData("Joy XL YL XR", String.format("%.2f", gamepad1LeftX) + " " +
+                String.format("%.2f", gamepad1LeftY) + " " + String.format("%.2f", gamepad1RightX));
+        telemetry.addData("f left pwr", "front left  pwr: " + String.format("%.2f", FrontLeft));
         telemetry.addData("f right pwr", "front right pwr: " + String.format("%.2f", FrontRight));
         telemetry.addData("b right pwr", "back right pwr: " + String.format("%.2f", BackRight));
         telemetry.addData("b left pwr", "back left pwr: " + String.format("%.2f", BackLeft));
@@ -146,9 +148,9 @@ public class Mcanum extends OpMode {
      * scaled value is less than linear.  This is to make it easier to drive
      * the robot more precisely at slower speeds.
      */
-    double scaleInput(double dVal)  {
-        double[] scaleArray = { 0.0, 0.05, 0.09, 0.10, 0.12, 0.15, 0.18, 0.24,
-                0.30, 0.36, 0.43, 0.50, 0.60, 0.72, 0.85, 1.00, 1.00 };
+    double scaleInput(double dVal) {
+        double[] scaleArray = {0.0, 0.05, 0.09, 0.10, 0.12, 0.15, 0.18, 0.24,
+                0.30, 0.36, 0.43, 0.50, 0.60, 0.72, 0.85, 1.00, 1.00};
 
         // get the corresponding index for the scaleInput array.
         int index = (int) (dVal * 16.0);
@@ -174,5 +176,4 @@ public class Mcanum extends OpMode {
         // return scaled value.
         return dScale;
     }
-
 }
