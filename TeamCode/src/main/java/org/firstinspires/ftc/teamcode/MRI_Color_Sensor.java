@@ -8,11 +8,12 @@ import com.qualcomm.robotcore.hardware.I2cDevice;
 import com.qualcomm.robotcore.hardware.I2cDeviceSynch;
 import com.qualcomm.robotcore.hardware.I2cDeviceSynchImpl;
 import com.qualcomm.robotcore.hardware.TouchSensor;
+import com.qualcomm.robotcore.hardware.configuration.DistributorInfo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
 @Autonomous (name = "Color Sensor", group = "MRI")
-
+@Disabled
 public class MRI_Color_Sensor extends OpMode {
 
     /* Declare OpMode members. */

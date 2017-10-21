@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -13,6 +14,7 @@ import static com.qualcomm.robotcore.hardware.configuration.BuiltInConfiguration
  * Created by emmab on 9/15/2017.
  */
 @Autonomous (name = "RedAuto", group = "Red")
+@Disabled
 public class Octopus_BR extends LinearOpMode {
 
     DcMotor Front_Left;

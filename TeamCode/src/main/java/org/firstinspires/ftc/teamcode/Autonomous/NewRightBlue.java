@@ -7,11 +7,8 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-/**
- * Created by emmab on 9/15/2017.
- */
-@Autonomous (name = "Right", group = "Red")
-public class RightRed extends LinearOpMode {
+@Autonomous (name = "RightBNew", group = "Blue")
+public class NewRightBlue extends LinearOpMode {
 
     DcMotor Front_Left;
     DcMotor Front_Right;
@@ -39,7 +36,7 @@ public class RightRed extends LinearOpMode {
         Color_Sensor.enableLed(true);
     }
 
-    public void driveForward(double driveForward) throws InterruptedException {
+    public void driveBackward(double driveBackward) throws InterruptedException {
         Front_Left.setPower(1);
         Front_Right.setPower(1);
         Back_Left.setPower(1);
@@ -52,7 +49,7 @@ public class RightRed extends LinearOpMode {
         Back_Right.setPower(0);
     }
 
-    public void driveBackward(long backward) throws InterruptedException {
+    public void driveForward(long Forward) throws InterruptedException {
         Front_Left.setPower(-1);
         Front_Right.setPower(-1);
         Back_Left.setPower(-1);
@@ -66,26 +63,25 @@ public class RightRed extends LinearOpMode {
 
     }
 
-    protected void senseRed(double sense) throws InterruptedException {
+    protected void senseBlue(double sense) throws InterruptedException {
         Jewel_Arm.setPosition(-1);
         sleep(2000);
 
         if (Color_Sensor.red() >= 4 ) {
-            driveBackward_Slo(.8);
-            sleep(1000);
-            Jewel_Arm.setPosition(1);
             driveForward_Slo((long).04);
+            sleep(1000);
+            Jewel_Arm.setPosition(1);
+            driveBackward_Slo((long).04);
             sleep(500);
-            turnleft(2);
+            turnright(2);
         } else {
-           driveForward_Slo(2);
+            driveBackward_Slo(2);
             sleep(1000);
             Jewel_Arm.setPosition(1);
             sleep(500);
-
-            driveForward_Slo((long).0005);
+            driveBackward_Slo((long).0005);
             turnleft(.5);
-            driveBackward_Slo(2);
+            driveForward_Slo(2);
 
             sleep(500);
         }
@@ -107,48 +103,53 @@ public class RightRed extends LinearOpMode {
     }
 
     public void turnright(double turnright) throws InterruptedException{
-        Front_Left.setPower(.1);
-        Front_Right.setPower(-.1);
-        Back_Left.setPower(.1);
-        Back_Right.setPower(-.1);
+        Front_Left.setPower(.2);
+        Front_Right.setPower(-.2);
+        Back_Left.setPower(.2);
+        Back_Right.setPower(-.2);
 
         sleep(1000);
         Front_Left.setPower(0);
         Front_Right.setPower(0);
         Back_Left.setPower(0);
         Back_Right.setPower(0);
-        }
+    }
 
-public void driveBackward_Slo(double backward_slo) throws InterruptedException {
-    Front_Left.setPower(-.2);
-    Front_Right.setPower(-.2);
-    Back_Left.setPower(-.2);
-    Back_Right.setPower(-.2);
+    public void driveBackward_Slo(double backward_slo) throws InterruptedException {
+        Front_Left.setPower(-.2);
+        Front_Right.setPower(-.2);
+        Back_Left.setPower(-.2);
+        Back_Right.setPower(-.2);
 
-    sleep(1000);
-    Front_Left.setPower(0);
-    Front_Right.setPower(0);
-    Back_Left.setPower(0);
-    Back_Right.setPower(0);
-        }
+        sleep(1000);
+        Front_Left.setPower(0);
+        Front_Right.setPower(0);
+        Back_Left.setPower(0);
+        Back_Right.setPower(0);
+    }
 
-public void driveForward_Slo(long forward_slo) throws InterruptedException {
-    Front_Left.setPower(.1);
-    Front_Right.setPower(.1);
-    Back_Left.setPower(.1);
-    Back_Right.setPower(.1);
+    public void driveForward_Slo(long forward_slo) throws InterruptedException {
+        Front_Left.setPower(.1);
+        Front_Right.setPower(.1);
+        Back_Left.setPower(.1);
+        Back_Right.setPower(.1);
 
-    sleep(1000);
-    Front_Left.setPower(0);
-    Front_Right.setPower(0);
-    Back_Left.setPower(0);
-    Back_Right.setPower(0);
-        }
+        sleep(1000);
+        Front_Left.setPower(0);
+        Front_Right.setPower(0);
+        Back_Left.setPower(0);
+        Back_Right.setPower(0);
+    }
+
+    public void closeClaw (double claw) throws InterruptedException {
+        Left_Claw.setPosition(1);
+
+    }
 
 //The above is all we'll need for now, we can add more as the plan develops more
 
-@Override
-public void runOpMode() throws InterruptedException {
+    @Override
+    public void runOpMode() throws InterruptedException {
         //gotta let names be known...
         hardwareMapping();
 
@@ -156,14 +157,14 @@ public void runOpMode() throws InterruptedException {
         //patiently waiting
         waitForStart();
         if (opModeIsActive()) {
+            closeClaw(1);
             sleep(100);
-            senseRed(1);
+            senseBlue(1);
 
 
 
 
         }
 
-     }
+    }
 }
-

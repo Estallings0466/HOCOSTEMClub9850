@@ -8,9 +8,9 @@ import com.qualcomm.robotcore.hardware.Servo;
 /**
  * Created by emmab on 9/20/2017.
  */
-@TeleOp (name = "Relic Test", group = "Testing")
+@TeleOp (name = "Arm testing", group = "Testing")
 public class servo_testing extends OpMode {
-    //Motor RelicArm;
+    DcMotor Arm;
     Servo Left;
     Servo Right;
     //DcMotor LeftForward;
@@ -22,23 +22,23 @@ public class servo_testing extends OpMode {
 
     @Override
     public void init(){
-        //RelicArm = hardwareMap.dcMotor.get("relic_arm");
-        Left = hardwareMap.servo.get("left_claw");
-        Right = hardwareMap.servo.get("right_claw");
+        Arm = hardwareMap.dcMotor.get("A");
+        Left = hardwareMap.servo.get("LC");
+        Right = hardwareMap.servo.get("RC");
 
 
-       // Left.setDirection(Servo.Direction.REVERSE);
+       Left.setDirection(Servo.Direction.FORWARD);
     }
 
     @Override
     public void loop() {
         float Lclaw = gamepad1.left_stick_y;
         float Rclaw = gamepad1.left_stick_y;
-        //float relicarm = gamepad1.right_stick_y;
+        float ArmTest = gamepad1.right_stick_y;
 
         Left.setPosition(Lclaw);
         Right.setPosition(Rclaw);
-        //RelicArm.setPower(relicarm);
+        Arm.setPower(ArmTest);
 
         Right.setDirection(Servo.Direction.REVERSE);
     }

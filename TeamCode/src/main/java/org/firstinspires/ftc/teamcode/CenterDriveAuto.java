@@ -14,7 +14,7 @@ import java.lang.Math;
  */
 
 @Autonomous(name ="CenterDriveAuto: Autonomous", group ="CenterDriveAuto")
-
+@Disabled
 public class CenterDriveAuto extends OpMode {
 
     DcMotor rightFrontMotor;

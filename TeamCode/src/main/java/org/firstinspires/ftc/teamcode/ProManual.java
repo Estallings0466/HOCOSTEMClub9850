@@ -16,7 +16,7 @@ public class ProManual extends OpMode{
     DcMotor Front_Left;
     DcMotor Front_Right;
     DcMotor Back_Left;
-   //DcMotor Back_Right;
+    DcMotor Back_Right;
     DcMotor Glyph_Lift;
     Servo Left_Claw;
     Servo Right_Claw;
@@ -27,7 +27,7 @@ public class ProManual extends OpMode{
         Front_Left = hardwareMap.dcMotor.get("FL");
         Front_Right = hardwareMap.dcMotor.get("FR");
         Back_Left = hardwareMap.dcMotor.get("BL");
-       // Back_Right = hardwareMap.dcMotor.get("BR");
+        Back_Right = hardwareMap.dcMotor.get("BR");
         Glyph_Lift = hardwareMap.dcMotor.get("GL");
         Jewel_Arm = hardwareMap.servo.get("JA");
         Left_Claw = hardwareMap.servo.get("LC");
@@ -51,7 +51,7 @@ public class ProManual extends OpMode{
         Front_Left.setPower(left);
         Back_Left.setPower(left);
         Front_Right.setPower(right);
-       // Back_Right.setPower(right);
+        Back_Right.setPower(right);
         Glyph_Lift.setPower(lift);
         Left_Claw.setPosition(claw);
         Right_Claw.setPosition(claw);

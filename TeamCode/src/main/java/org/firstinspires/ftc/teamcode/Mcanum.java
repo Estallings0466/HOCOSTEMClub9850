@@ -61,7 +61,7 @@ public class Mcanum extends OpMode {
         Front_Left = hardwareMap.dcMotor.get("FL");
         Back_Right = hardwareMap.dcMotor.get("BR");
         Front_Right = hardwareMap.dcMotor.get("FR");
-        Back_Right = hardwareMap.dcMotor.get("BR");
+        Back_Left = hardwareMap.dcMotor.get("BL");
         Glyph_Lift = hardwareMap.dcMotor.get("GL");
         Jewel_Arm = hardwareMap.servo.get("JA");
         //SwivelClaw = hardwareMap.servo.get("swivel_claw");
@@ -73,7 +73,7 @@ public class Mcanum extends OpMode {
         //motorBackRight.setDirection(DcMotor.Direction.REVERSE);
         Left_Claw.setDirection(Servo.Direction.REVERSE);
         Right_Claw.setDirection(Servo.Direction.REVERSE);
-        //Jewel_Arm.setDirection(Servo.Direction.FORWARD);
+        Jewel_Arm.setPosition(1);
         //reverse lifts autonomous arm up
 
     }

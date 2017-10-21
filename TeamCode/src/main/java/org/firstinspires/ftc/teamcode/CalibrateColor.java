@@ -28,6 +28,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
  */
 
 @TeleOp(name = "Calibrate MR Color", group = "Utilities")
+@Disabled
 public class CalibrateColor extends OpMode {
 
     // Color Sensor to calibrate. Require that it is a Modern Robotics sensor.
