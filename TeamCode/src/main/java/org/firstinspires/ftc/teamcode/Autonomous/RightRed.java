@@ -17,16 +17,22 @@ public class RightRed extends LinearOpMode {
     DcMotor Front_Right;
     DcMotor Back_Left;
     DcMotor Back_Right;
+    DcMotor Glyph_Lift ;
     ColorSensor Color_Sensor;
     Servo Jewel_Arm;
+    Servo Left_Claw;
+    Servo Right_Claw;
 
     public void hardwareMapping() {
         Front_Left = hardwareMap.dcMotor.get("FL");
         Front_Right = hardwareMap.dcMotor.get("FR");
         Back_Left = hardwareMap.dcMotor.get("BL");
         Back_Right = hardwareMap.dcMotor.get("BR");
+        Glyph_Lift = hardwareMap.dcMotor.get("GL");
         Color_Sensor = hardwareMap.colorSensor.get("CS");
         Jewel_Arm = hardwareMap.servo.get("JA");
+        Left_Claw = hardwareMap.servo.get("LC");
+        Right_Claw = hardwareMap.servo.get("RC");
 
         Front_Left.setDirection(DcMotorSimple.Direction.REVERSE);
         Back_Left.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -34,10 +40,10 @@ public class RightRed extends LinearOpMode {
     }
 
     public void driveForward(double driveForward) throws InterruptedException {
-        Front_Left.setPower(.2);
-        Front_Right.setPower(.2);
-        Back_Left.setPower(.2);
-        Back_Right.setPower(.2);
+        Front_Left.setPower(1);
+        Front_Right.setPower(1);
+        Back_Left.setPower(1);
+        Back_Right.setPower(1);
 
         sleep(1000);
         Front_Left.setPower(0);
@@ -47,10 +53,10 @@ public class RightRed extends LinearOpMode {
     }
 
     public void driveBackward(long backward) throws InterruptedException {
-        Front_Left.setPower(-.2);
-        Front_Right.setPower(-.2);
-        Back_Left.setPower(-.2);
-        Back_Right.setPower(-.2);
+        Front_Left.setPower(-1);
+        Front_Right.setPower(-1);
+        Back_Left.setPower(-1);
+        Back_Right.setPower(-1);
 
         sleep(1000);
         Front_Left.setPower(0);
@@ -65,24 +71,33 @@ public class RightRed extends LinearOpMode {
         sleep(2000);
 
         if (Color_Sensor.red() >= 4 ) {
-            turnright(2);
+            driveBackward_Slo(2);
+            sleep(1000);
+            Jewel_Arm.setPosition(1);
+            turnleft(.8);
+            driveForward(.04);
+            sleep(500);
+        } else {
+           driveForward_Slo(1);
             sleep(1000);
             Jewel_Arm.setPosition(1);
             sleep(500);
-        } else {
-           turnleft(1);
-            sleep(1000);
-            Jewel_Arm.setPosition(1);
+            driveBackward_Slo(2);
+            driveForward_Slo((long).15);
+            turnleft(1.9);
+            driveBackward_Slo(11);
+
             sleep(500);
         }
 
     }
 
     public void turnleft(double turnleft) throws InterruptedException {
-        Front_Left.setPower(-.1);
-        Front_Right.setPower(.1);
-        Back_Left.setPower(-.1);
-        Back_Right.setPower(.1);
+        Front_Left.setPower(-.3);
+        Front_Right.setPower(.3);
+        Back_Left.setPower(-.3);
+        Back_Right.setPower(.3);
+
 
         sleep(1000);
         Front_Left.setPower(0);
@@ -143,8 +158,8 @@ public void runOpMode() throws InterruptedException {
         if (opModeIsActive()) {
             sleep(100);
             senseRed(1);
-            driveBackward_Slo(.2);
-            turnleft(2);
+
+
 
 
         }
