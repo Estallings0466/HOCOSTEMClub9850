@@ -68,21 +68,21 @@ public class NewRightBlue extends LinearOpMode {
         sleep(2000);
 
         if (Color_Sensor.red() >= 4 ) {
-            driveForward_Slo((long).04);
+            driveBackward_Slo((long).02);
             sleep(1000);
             Jewel_Arm.setPosition(1);
-            driveBackward_Slo((long).04);
+            driveForward_Slo((long).6);
+            turnright(.005);
+            driveForward_Slo((long).3);
             sleep(500);
-            turnright(2);
-        } else {
-            driveBackward_Slo(2);
-            sleep(1000);
-            Jewel_Arm.setPosition(1);
-            sleep(500);
-            driveBackward_Slo((long).0005);
-            turnleft(.5);
-            driveForward_Slo(2);
 
+        } else {
+            driveForward_Slo(2);
+            sleep(1000);
+            Jewel_Arm.setPosition(1);
+            sleep(500);
+            turnright(.005);
+            driveForward_Slo((long).8);
             sleep(500);
         }
 
@@ -116,10 +116,10 @@ public class NewRightBlue extends LinearOpMode {
     }
 
     public void driveBackward_Slo(double backward_slo) throws InterruptedException {
-        Front_Left.setPower(-.2);
-        Front_Right.setPower(-.2);
-        Back_Left.setPower(-.2);
-        Back_Right.setPower(-.2);
+        Front_Left.setPower(-.1);
+        Front_Right.setPower(-.1);
+        Back_Left.setPower(-.1);
+        Back_Right.setPower(-.1);
 
         sleep(1000);
         Front_Left.setPower(0);
@@ -129,10 +129,10 @@ public class NewRightBlue extends LinearOpMode {
     }
 
     public void driveForward_Slo(long forward_slo) throws InterruptedException {
-        Front_Left.setPower(.1);
-        Front_Right.setPower(.1);
-        Back_Left.setPower(.1);
-        Back_Right.setPower(.1);
+        Front_Left.setPower(.3);
+        Front_Right.setPower(.3);
+        Back_Left.setPower(.3);
+        Back_Right.setPower(.3);
 
         sleep(1000);
         Front_Left.setPower(0);

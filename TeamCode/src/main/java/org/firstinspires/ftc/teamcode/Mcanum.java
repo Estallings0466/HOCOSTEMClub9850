@@ -22,11 +22,12 @@ import com.qualcomm.robotcore.util.Range;
         X           X
           X       X
 */
-@TeleOp(name = "Main Manual", group = "Mcanum Program")
+@TeleOp(name = "new Main Manual", group = "Mcanum Program")
 //@Disabled
+
 public class Mcanum extends OpMode {
 
-    //  DcMotor Relic_Arm;
+    DcMotor RelicArm;
     Servo Jewel_Arm;
     Servo Left_Claw;
     Servo Right_Claw;
@@ -34,9 +35,9 @@ public class Mcanum extends OpMode {
     DcMotor Back_Right;
     DcMotor Front_Right;
     DcMotor Back_Left;
-    //  Servo Relic_Claw;
+      Servo RelicClaw;
     DcMotor Glyph_Lift;
-    // Servo SwivelClaw;
+     Servo SwivelClaw;
 
     /**
      * Constructor
@@ -54,8 +55,8 @@ public class Mcanum extends OpMode {
        * that the names of the devices must match the names used when you
        * configured your robot and created the configuration file.
        */
-        // RelicArm = hardwareMap.dcMotor.get("relic_arm");
-        // RelicClaw = hardwareMap.servo.get("relic_claw");
+         RelicArm = hardwareMap.dcMotor.get("RA");
+         RelicClaw = hardwareMap.servo.get("REC");
         Left_Claw = hardwareMap.servo.get("LC");
         Right_Claw = hardwareMap.servo.get("RC");
         Front_Left = hardwareMap.dcMotor.get("FL");
