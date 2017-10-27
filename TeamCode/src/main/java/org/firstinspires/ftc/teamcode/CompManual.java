@@ -29,14 +29,14 @@ public class CompManual extends OpMode {
     DcMotor Front_Left;
     DcMotor Back_Right;
     DcMotor Back_Left;
-    DcMotor Relic_Arm;
-    DcMotor Pivot;
+   // DcMotor Relic_Arm;
+    //DcMotor Pivot;
     DcMotor Glyph_lift;
-    Servo Relic_Claw;
+    //Servo Relic_Claw;
     Servo Left_Claw;
     Servo Right_Claw;
-    Servo Right_ClawBot;
-    Servo Left_ClawBot;
+   // Servo Right_ClawBot;
+   // Servo Left_ClawBot;
 
     Servo LJewel_Arm;
     Servo RJewel_Arm;
@@ -63,14 +63,14 @@ public class CompManual extends OpMode {
         Front_Left = hardwareMap.dcMotor.get("FL");
         Back_Left = hardwareMap.dcMotor.get("BL");
         Back_Right = hardwareMap.dcMotor.get("BR");
-        Relic_Arm = hardwareMap.dcMotor.get("RA");
-        Pivot = hardwareMap.dcMotor.get("P");
-        Relic_Claw = hardwareMap.servo.get("REC");
+        //Relic_Arm = hardwareMap.dcMotor.get("RA");
+      //  Pivot = hardwareMap.dcMotor.get("P");
+        //Relic_Claw = hardwareMap.servo.get("REC");
         Glyph_lift = hardwareMap.dcMotor.get("GL");
         Left_Claw = hardwareMap.servo.get("LC");
-        Left_ClawBot = hardwareMap.servo.get("LCB");
+       // Left_ClawBot = hardwareMap.servo.get("LCB");
          Right_Claw = hardwareMap.servo.get("RC");
-        Right_ClawBot = hardwareMap.servo.get("RCB");
+       // Right_ClawBot = hardwareMap.servo.get("RCB");
 
         LJewel_Arm = hardwareMap.servo.get("LJA");
        RJewel_Arm = hardwareMap.servo.get("RJA");
@@ -121,19 +121,19 @@ public class CompManual extends OpMode {
         Front_Left.setPower(FrontLeft);
         Back_Left.setPower(BackLeft);
         Back_Right.setPower(BackRight);
-        Relic_Claw.setPosition(Claw);
-        Pivot.setPower(P);
-        Relic_Arm.setPower(Arm);
+       // Relic_Claw.setPosition(Claw);
+        //Pivot.setPower(P);
+        //Relic_Arm.setPower(Arm);
         Left_Claw.setPosition(Lclaw);
-        Left_ClawBot.setPosition(LBClaw);
+       // Left_ClawBot.setPosition(LBClaw);
          Right_Claw.setPosition(Rclaw);
-        Right_ClawBot.setPosition(RBClaw);
+     //   Right_ClawBot.setPosition(RBClaw);
         Glyph_lift.setPower(Slide);
 
         Left_Claw.setDirection(Servo.Direction.REVERSE);
-        Left_ClawBot.setDirection(Servo.Direction.REVERSE);
+       // Left_ClawBot.setDirection(Servo.Direction.REVERSE);
          Right_Claw.setDirection(Servo.Direction.REVERSE);
-        Right_ClawBot.setDirection(Servo.Direction.REVERSE);
+       // Right_ClawBot.setDirection(Servo.Direction.REVERSE);
         Glyph_lift.setDirection(DcMotor.Direction.REVERSE);
 
         LJewel_Arm.setDirection(Servo.Direction.FORWARD);
