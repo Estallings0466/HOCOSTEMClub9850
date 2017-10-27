@@ -80,6 +80,7 @@ public class NewRightBlue extends LinearOpMode {
 
     protected void senseBlue(double sense) throws InterruptedException {
         LJewel_Arm.setPosition(-1);
+        RJewel_Arm.setPosition(0);
         sleep(2000);
 
         if (LColor_Sensor.red() >= 4 ) {
