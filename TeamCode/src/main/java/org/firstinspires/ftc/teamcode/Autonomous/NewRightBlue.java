@@ -15,10 +15,15 @@ public class NewRightBlue extends LinearOpMode {
     DcMotor Back_Left;
     DcMotor Back_Right;
     DcMotor Glyph_Lift ;
+    DcMotor RelicClaw;
+    DcMotor RelicArm;
     ColorSensor Color_Sensor;
     Servo Jewel_Arm;
-    Servo Left_Claw;
-    Servo Right_Claw;
+    Servo LeftB_Claw;
+    Servo LeftT_Claw;
+    Servo RightB_Claw;
+    Servo RightT_Claw;
+    Servo Relic_Servo;
 
     public void hardwareMapping() {
         Front_Left = hardwareMap.dcMotor.get("FL");
@@ -26,10 +31,15 @@ public class NewRightBlue extends LinearOpMode {
         Back_Left = hardwareMap.dcMotor.get("BL");
         Back_Right = hardwareMap.dcMotor.get("BR");
         Glyph_Lift = hardwareMap.dcMotor.get("GL");
+        //RelicClaw = hardwareMap.dcMotor.get("REC");
+        //RelicArm = hardwareMap.dcMotor.get("RA");
         Color_Sensor = hardwareMap.colorSensor.get("CS");
         Jewel_Arm = hardwareMap.servo.get("JA");
-        Left_Claw = hardwareMap.servo.get("LC");
-        Right_Claw = hardwareMap.servo.get("RC");
+        LeftB_Claw = hardwareMap.servo.get("LBC");
+        LeftT_Claw =hardwareMap.servo.get("LTC");
+        RightB_Claw = hardwareMap.servo.get("RBC");
+        RightT_Claw = hardwareMap.servo.get("RTC");
+        //Relic_Servo = hardwareMap.servo.get("RS");
 
         Front_Left.setDirection(DcMotorSimple.Direction.REVERSE);
         Back_Left.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -37,10 +47,10 @@ public class NewRightBlue extends LinearOpMode {
     }
 
     public void driveBackward(double driveBackward) throws InterruptedException {
-        Front_Left.setPower(1);
-        Front_Right.setPower(1);
-        Back_Left.setPower(1);
-        Back_Right.setPower(1);
+        Front_Left.setPower(.20);
+        Front_Right.setPower(.20);
+        Back_Left.setPower(.20);
+        Back_Right.setPower(.20);
 
         sleep(1000);
         Front_Left.setPower(0);
@@ -68,21 +78,22 @@ public class NewRightBlue extends LinearOpMode {
         sleep(2000);
 
         if (Color_Sensor.red() >= 4 ) {
-            driveBackward_Slo((long).02);
+            driveBackward_Slo2((long).3);
             sleep(1000);
             Jewel_Arm.setPosition(1);
-            driveForward_Slo((long).6);
-            turnright(.005);
+            driveBackward(.3);
             driveForward_Slo((long).3);
+
+
             sleep(500);
 
         } else {
-            driveForward_Slo(2);
+            driveForward_Slo((long).01);
             sleep(1000);
             Jewel_Arm.setPosition(1);
             sleep(500);
             turnright(.005);
-            driveForward_Slo((long).8);
+            driveForward_Slo((long).15);
             sleep(500);
         }
 
@@ -127,12 +138,25 @@ public class NewRightBlue extends LinearOpMode {
         Back_Left.setPower(0);
         Back_Right.setPower(0);
     }
+    public void driveBackward_Slo2(double backward_slo) throws InterruptedException {
+        Front_Left.setPower(-.09);
+        Front_Right.setPower(-.09);
+        Back_Left.setPower(-.09);
+        Back_Right.setPower(-.09);
+
+        sleep(1000);
+        Front_Left.setPower(0);
+        Front_Right.setPower(0);
+        Back_Left.setPower(0);
+        Back_Right.setPower(0);
+    }
+
 
     public void driveForward_Slo(long forward_slo) throws InterruptedException {
-        Front_Left.setPower(.3);
-        Front_Right.setPower(.3);
-        Back_Left.setPower(.3);
-        Back_Right.setPower(.3);
+        Front_Left.setPower(.2);
+        Front_Right.setPower(.2);
+        Back_Left.setPower(.2);
+        Back_Right.setPower(.2);
 
         sleep(1000);
         Front_Left.setPower(0);
@@ -142,7 +166,8 @@ public class NewRightBlue extends LinearOpMode {
     }
 
     public void closeClaw (double claw) throws InterruptedException {
-        Left_Claw.setPosition(1);
+        LeftB_Claw.setPosition(1);
+        LeftT_Claw.setPosition(1);
 
     }
 

@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
@@ -27,16 +28,22 @@ import com.qualcomm.robotcore.util.Range;
 
 public class Mcanum extends OpMode {
 
-    DcMotor RelicArm;
-    Servo Jewel_Arm;
-    Servo Left_Claw;
-    Servo Right_Claw;
+   // DcMotor RelicArm;
+
+
     DcMotor Front_Left;
-    DcMotor Back_Right;
     DcMotor Front_Right;
     DcMotor Back_Left;
-      Servo RelicClaw;
-    DcMotor Glyph_Lift;
+    DcMotor Back_Right;
+    DcMotor Glyph_Lift ;
+    //DcMotor RelicClaw;
+   // DcMotor RelicArm;
+     Servo Jewel_Arm;
+    Servo LeftB_Claw;
+    Servo LeftT_Claw;
+    Servo RightB_Claw;
+    Servo RightT_Claw;
+    Servo Relic_Servo;
      Servo SwivelClaw;
 
     /**
@@ -55,16 +62,21 @@ public class Mcanum extends OpMode {
        * that the names of the devices must match the names used when you
        * configured your robot and created the configuration file.
        */
-         RelicArm = hardwareMap.dcMotor.get("RA");
-         RelicClaw = hardwareMap.servo.get("REC");
-        Left_Claw = hardwareMap.servo.get("LC");
-        Right_Claw = hardwareMap.servo.get("RC");
+        // RelicArm = hardwareMap.dcMotor.get("RA");
+        // RelicClaw = hardwareMap.servo.get("REC");
         Front_Left = hardwareMap.dcMotor.get("FL");
-        Back_Right = hardwareMap.dcMotor.get("BR");
         Front_Right = hardwareMap.dcMotor.get("FR");
         Back_Left = hardwareMap.dcMotor.get("BL");
+        Back_Right = hardwareMap.dcMotor.get("BR");
         Glyph_Lift = hardwareMap.dcMotor.get("GL");
         Jewel_Arm = hardwareMap.servo.get("JA");
+        LeftB_Claw = hardwareMap.servo.get("LBC");
+        LeftT_Claw =hardwareMap.servo.get("LTC");
+        RightB_Claw = hardwareMap.servo.get("RBC");
+        RightT_Claw = hardwareMap.servo.get("RTC");
+        //Relic_Servo = hardwareMap.servo.get("RS");
+
+        //Relic_Servo = hardwareMap.servo.get("RS");
         //SwivelClaw = hardwareMap.servo.get("swivel_claw");
         //These work without reversing (Tetrix motors).
         //AndyMark motors may be opposite, in which case uncomment these lines:
@@ -72,8 +84,10 @@ public class Mcanum extends OpMode {
         //motorBackLeft.setDirection(DcMotor.Direction.REVERSE);
         //motorFrontRight.setDirection(DcMotor.Direction.REVERSE);
         //motorBackRight.setDirection(DcMotor.Direction.REVERSE);
-        Left_Claw.setDirection(Servo.Direction.REVERSE);
-        Right_Claw.setDirection(Servo.Direction.REVERSE);
+        LeftB_Claw.setDirection(Servo.Direction.REVERSE);
+        RightB_Claw.setDirection(Servo.Direction.REVERSE);
+        LeftT_Claw.setDirection(Servo.Direction.REVERSE);
+        RightT_Claw.setDirection(Servo.Direction.REVERSE);
         Jewel_Arm.setPosition(1);
         //reverse lifts autonomous arm up
 
@@ -91,8 +105,8 @@ public class Mcanum extends OpMode {
         float gamepad1RightX = gamepad1.right_stick_x;
         float Lclaw = gamepad2.left_stick_y;
         float Rclaw = gamepad2.left_stick_y;
-        //  float Claw = gamepad2.right_trigger;
-        //  float Arm = gamepad2.right_stick_x;
+        float Claw = gamepad2.right_trigger;
+        float Arm = gamepad2.right_stick_x;
         float Chain = gamepad2.right_stick_y;
         // float Swivel = gamepad2.left_trigger;
         float JewelA = gamepad1.right_trigger;
@@ -115,13 +129,16 @@ public class Mcanum extends OpMode {
         Back_Right.setPower(BackRight);
         Front_Right.setPower(FrontRight);
         Back_Left.setPower(BackLeft);
-        Left_Claw.setPosition(Lclaw);
-        Right_Claw.setPosition(Rclaw);
-        //  RelicArm.setPower(Arm);
-        //  RelicClaw.setPosition(Claw);
+        LeftB_Claw.setPosition(Lclaw);
+        LeftT_Claw.setPosition(Lclaw);
+        RightB_Claw.setPosition(Rclaw);
+        RightT_Claw.setPosition(Rclaw);
+        //RelicArm.setPower(Arm);
+       // RelicClaw.setPosition(Claw);
         Glyph_Lift.setPower(Chain);
         //  SwivelClaw.setPosition(Swivel);
-        Right_Claw.setDirection(Servo.Direction.FORWARD);
+        RightB_Claw.setDirection(Servo.Direction.FORWARD);
+        RightT_Claw.setDirection(Servo.Direction.FORWARD);
 
 
       /*
