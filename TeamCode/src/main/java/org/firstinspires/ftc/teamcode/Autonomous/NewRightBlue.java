@@ -97,7 +97,7 @@ public class NewRightBlue extends LinearOpMode {
             LJewel_Arm.setPosition(1);
             sleep(500);
             turnright(.005);
-            driveForward_Slo2((long).2);
+            driveForward_Slo((long).2);
             sleep(500);
         }
 
@@ -131,10 +131,10 @@ public class NewRightBlue extends LinearOpMode {
     }
 
     public void driveBackward_Slo(double backward_slo) throws InterruptedException {
-        Front_Left.setPower(-.1);
-        Front_Right.setPower(-.1);
-        Back_Left.setPower(-.1);
-        Back_Right.setPower(-.1);
+        Front_Left.setPower(-.2);
+        Front_Right.setPower(-.2);
+        Back_Left.setPower(-.2);
+        Back_Right.setPower(-.2);
 
         sleep(1000);
         Front_Left.setPower(0);
@@ -170,10 +170,10 @@ public class NewRightBlue extends LinearOpMode {
 
 
     public void driveForward_Slo(long forward_slo) throws InterruptedException {
-        Front_Left.setPower(.15);
-        Front_Right.setPower(.15);
-        Back_Left.setPower(.15);
-        Back_Right.setPower(.15);
+        Front_Left.setPower(.3);
+        Front_Right.setPower(.3);
+        Back_Left.setPower(.3);
+        Back_Right.setPower(.3);
 
         sleep(1000);
         Front_Left.setPower(0);

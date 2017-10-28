@@ -7,14 +7,14 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous (name = "Right Red", group = "Red")
-public class NewRightRed extends LinearOpMode {
+@Autonomous (name = "Left Red", group = "Red")
+public class NewLeftRed extends LinearOpMode {
 
     DcMotor Front_Left;
     DcMotor Front_Right;
     DcMotor Back_Left;
     DcMotor Back_Right;
-    DcMotor Glyph_Lift ;
+    DcMotor Glyph_Lift;
     DcMotor RelicClaw;
     DcMotor RelicArm;
     ColorSensor LColor_Sensor;
@@ -36,11 +36,11 @@ public class NewRightRed extends LinearOpMode {
         //RelicClaw = hardwareMap.dcMotor.get("REC");
         //RelicArm = hardwareMap.dcMotor.get("RA");
         LColor_Sensor = hardwareMap.colorSensor.get("LCS");
-        RColor_Sensor =hardwareMap.colorSensor.get("RCS");
+        RColor_Sensor = hardwareMap.colorSensor.get("RCS");
         LJewel_Arm = hardwareMap.servo.get("LJA");
         RJewel_Arm = hardwareMap.servo.get("RJA");
         LeftB_Claw = hardwareMap.servo.get("LBC");
-        LeftT_Claw =hardwareMap.servo.get("LTC");
+        LeftT_Claw = hardwareMap.servo.get("LTC");
         RightB_Claw = hardwareMap.servo.get("RBC");
         RightT_Claw = hardwareMap.servo.get("RTC");
         //Relic_Servo = hardwareMap.servo.get("RS");
@@ -83,24 +83,20 @@ public class NewRightRed extends LinearOpMode {
         LJewel_Arm.setPosition(1);
         sleep(2000);
 
-        if (LColor_Sensor.red() >= 4 ) {
-            driveBackward_Slo((long).01);
+        if (LColor_Sensor.red() >= 4) {
+            driveBackward_Slo((long) .01);
             sleep(1000);
             LJewel_Arm.setPosition(1);
             RJewel_Arm.setPosition(1);
             sleep(500);
             turnleft(.005);
-            driveForward_Slo2((long).2);
+            driveForward_Slo((long) .2);
             sleep(500);
 
         } else {
-            driveForward_Slo2((long).3);
-            sleep(1000);
+            driveForward_Slo2((long) .3);
             LJewel_Arm.setPosition(1);
             RJewel_Arm.setPosition(1);
-            turnright(.3);
-            driveForward((long).3);
-            driveForward_Slo((long).8);
             sleep(500);
         }
 
@@ -120,7 +116,7 @@ public class NewRightRed extends LinearOpMode {
         Back_Right.setPower(0);
     }
 
-    public void turnright(double turnright) throws InterruptedException{
+    public void turnright(double turnright) throws InterruptedException {
         Front_Left.setPower(.2);
         Front_Right.setPower(-.2);
         Back_Left.setPower(.2);
@@ -134,10 +130,10 @@ public class NewRightRed extends LinearOpMode {
     }
 
     public void driveBackward_Slo(double backward_slo) throws InterruptedException {
-        Front_Left.setPower(-.1);
-        Front_Right.setPower(-.1);
-        Back_Left.setPower(-.1);
-        Back_Right.setPower(-.1);
+        Front_Left.setPower(-.4);
+        Front_Right.setPower(-.4);
+        Back_Left.setPower(-.4);
+        Back_Right.setPower(-.4);
 
         sleep(1000);
         Front_Left.setPower(0);
@@ -145,6 +141,7 @@ public class NewRightRed extends LinearOpMode {
         Back_Left.setPower(0);
         Back_Right.setPower(0);
     }
+
     public void driveBackward_Slo2(double backward_slo) throws InterruptedException {
         Front_Left.setPower(-.09);
         Front_Right.setPower(-.09);
@@ -207,7 +204,6 @@ public class NewRightRed extends LinearOpMode {
             closeClaw(1);
             sleep(100);
             senseRed(1);
-
         }
 
     }
