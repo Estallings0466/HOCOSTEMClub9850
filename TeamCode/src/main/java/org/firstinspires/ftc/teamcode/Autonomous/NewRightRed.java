@@ -83,7 +83,7 @@ public class NewRightRed extends LinearOpMode {
         LJewel_Arm.setPosition(1);
         sleep(2000);
 
-        if (LColor_Sensor.red() >= 4 ) {
+        if (RColor_Sensor.red() >= 4 ) {
             driveBackward_Slo((long).01);
             sleep(1000);
             LJewel_Arm.setPosition(1);

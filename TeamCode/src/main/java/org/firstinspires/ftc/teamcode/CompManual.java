@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
         import com.qualcomm.robotcore.eventloop.opmode.OpMode;
         import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+        import com.qualcomm.robotcore.hardware.ColorSensor;
         import com.qualcomm.robotcore.hardware.DcMotor;
         import com.qualcomm.robotcore.hardware.Servo;
         import com.qualcomm.robotcore.util.Range;
@@ -25,21 +26,22 @@ package org.firstinspires.ftc.teamcode;
 //@Disabled
 public class CompManual extends OpMode {
 
-    DcMotor Front_Right;
     DcMotor Front_Left;
-    DcMotor Back_Right;
+    DcMotor Front_Right;
     DcMotor Back_Left;
-   // DcMotor Relic_Arm;
-    //DcMotor Pivot;
-    DcMotor Glyph_lift;
-    //Servo Relic_Claw;
-    Servo Left_Claw;
-    Servo Right_Claw;
-   // Servo Right_ClawBot;
-   // Servo Left_ClawBot;
-
+    DcMotor Back_Right;
+    DcMotor Glyph_Lift ;
+   // DcMotor RelicClaw;
+   // DcMotor RelicArm;
+   // ColorSensor LColor_Sensor;
+   // ColorSensor RColor_Sensor;
     Servo LJewel_Arm;
     Servo RJewel_Arm;
+    Servo LeftB_Claw;
+    Servo LeftT_Claw;
+    Servo RightB_Claw;
+    Servo RightT_Claw;
+   // Servo Relic_Servo;
 
     /**
      * Constructor
@@ -57,24 +59,22 @@ public class CompManual extends OpMode {
 		 * that the names of the devices must match the names used when you
 		 * configured your robot and created the configuration file.
 		 */
-
-
-        Front_Right = hardwareMap.dcMotor.get("FR");
         Front_Left = hardwareMap.dcMotor.get("FL");
+        Front_Right = hardwareMap.dcMotor.get("FR");
         Back_Left = hardwareMap.dcMotor.get("BL");
         Back_Right = hardwareMap.dcMotor.get("BR");
-        //Relic_Arm = hardwareMap.dcMotor.get("RA");
-      //  Pivot = hardwareMap.dcMotor.get("P");
-        //Relic_Claw = hardwareMap.servo.get("REC");
-        Glyph_lift = hardwareMap.dcMotor.get("GL");
-        Left_Claw = hardwareMap.servo.get("LC");
-       // Left_ClawBot = hardwareMap.servo.get("LCB");
-         Right_Claw = hardwareMap.servo.get("RC");
-       // Right_ClawBot = hardwareMap.servo.get("RCB");
-
+        Glyph_Lift = hardwareMap.dcMotor.get("GL");
+        //RelicClaw = hardwareMap.dcMotor.get("REC");
+        //RelicArm = hardwareMap.dcMotor.get("RA");
+        //LColor_Sensor = hardwareMap.colorSensor.get("LCS");
+        //RColor_Sensor =hardwareMap.colorSensor.get("RCS");
         LJewel_Arm = hardwareMap.servo.get("LJA");
-       RJewel_Arm = hardwareMap.servo.get("RJA");
-
+        RJewel_Arm = hardwareMap.servo.get("RJA");
+        LeftB_Claw = hardwareMap.servo.get("LBC");
+        LeftT_Claw =hardwareMap.servo.get("LTC");
+        RightB_Claw = hardwareMap.servo.get("RBC");
+        RightT_Claw = hardwareMap.servo.get("RTC");
+        //Relic_Servo = hardwareMap.servo.get("RS");
         //These work without reversing (Tetrix motors).
         //AndyMark motors may be opposite, in which case uncomment these lines:
         //motorFrontLeft.setDirection(DcMotor.Direction.REVERSE);
@@ -124,17 +124,21 @@ public class CompManual extends OpMode {
        // Relic_Claw.setPosition(Claw);
         //Pivot.setPower(P);
         //Relic_Arm.setPower(Arm);
-        Left_Claw.setPosition(Lclaw);
+        LeftB_Claw.setPosition(Lclaw);
+        LeftT_Claw.setPosition(Lclaw);
        // Left_ClawBot.setPosition(LBClaw);
-         Right_Claw.setPosition(Rclaw);
+         RightB_Claw.setPosition(Rclaw);
+        RightT_Claw.setPosition(Rclaw);
      //   Right_ClawBot.setPosition(RBClaw);
-        Glyph_lift.setPower(Slide);
+        Glyph_Lift.setPower(Slide);
 
-        Left_Claw.setDirection(Servo.Direction.REVERSE);
+        LeftB_Claw.setDirection(Servo.Direction.REVERSE);
+        LeftT_Claw.setDirection(Servo.Direction.REVERSE);
        // Left_ClawBot.setDirection(Servo.Direction.REVERSE);
-         Right_Claw.setDirection(Servo.Direction.REVERSE);
+         RightB_Claw.setDirection(Servo.Direction.REVERSE);
+        RightT_Claw.setDirection(Servo.Direction.REVERSE);
        // Right_ClawBot.setDirection(Servo.Direction.REVERSE);
-        Glyph_lift.setDirection(DcMotor.Direction.REVERSE);
+        Glyph_Lift.setDirection(DcMotor.Direction.REVERSE);
 
         LJewel_Arm.setDirection(Servo.Direction.FORWARD);
         RJewel_Arm.setDirection(Servo.Direction.FORWARD);
