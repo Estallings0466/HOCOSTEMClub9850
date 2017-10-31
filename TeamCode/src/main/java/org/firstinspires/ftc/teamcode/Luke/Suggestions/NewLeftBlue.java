@@ -40,25 +40,24 @@ public class NewLeftBlue extends LinearOpMode {
             }else if(vuMark == RelicRecoveryVuMark.RIGHT){
                  /* Found an instance of the template. The following is for CENTER or UNKNOWN. */
                 telemetry.addData("VuMark", "%s visible", vuMark);
-            }else
-            {
+            }else {
                 telemetry.addData("VuMark", "%s visible", vuMark);
 
-            robot.lowerJewelArm();
-            if (robot.isRed()) {
-                robot.driveForward(.01);
-                sleep(1000);
-                robot.raiseJewelArm();
-                sleep(500);
+                robot.lowerJewelArm();
+                if (robot.isRed()) {
+                    robot.driveForward(.01);
+                    sleep(1000);
+                    robot.raiseJewelArm();
+                    sleep(500);
 
 
-            } else {
-                robot.driveBackward(.01);
-                sleep(1000);
-                robot.raiseJewelArm();
-                sleep(500);
+                } else {
+                    robot.driveBackward(.01);
+                    sleep(1000);
+                    robot.raiseJewelArm();
+                    sleep(500);
 
-            }
+                }
             }
         }
 
