@@ -6,6 +6,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
+
 @Autonomous (name = "Left Blue", group = "Blue")
 public class NewLeftBlue extends LinearOpMode {
 
@@ -14,13 +16,34 @@ public class NewLeftBlue extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         robot.init(hardwareMap);
+        robot.initVuforia(hardwareMap);
 
+        telemetry.addData(">", "Press Play to start");
+        telemetry.update();
 
         //patiently waiting
         waitForStart();
+
+        RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(robot.relicTemplate);
+
         if (opModeIsActive()) {
+            /*close the arm initially to hold glyph*/
             robot.closeClaw(1);
             sleep(100);
+
+                /* Found an instance of the template.  */
+            if (vuMark == RelicRecoveryVuMark.LEFT) {
+
+
+                telemetry.addData("VuMark", "%s visible", vuMark);
+
+            }else if(vuMark == RelicRecoveryVuMark.RIGHT){
+                 /* Found an instance of the template. The following is for CENTER or UNKNOWN. */
+                telemetry.addData("VuMark", "%s visible", vuMark);
+            }else
+            {
+                telemetry.addData("VuMark", "%s visible", vuMark);
+
             robot.lowerJewelArm();
             if (robot.isRed()) {
                 robot.driveForward(.01);
@@ -35,6 +58,7 @@ public class NewLeftBlue extends LinearOpMode {
                 robot.raiseJewelArm();
                 sleep(500);
 
+            }
             }
         }
 
