@@ -83,7 +83,7 @@ public class NewLeftBlue extends LinearOpMode {
         RJewel_Arm.setPosition(1);
         sleep(2000);
 
-        if (LColor_Sensor.red() >= 4 ) {
+        if (LColor_Sensor.red() >= 1 ) {
             driveBackward_Slo2((long).3);
             sleep(1000);
             LJewel_Arm.setPosition(1);

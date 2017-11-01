@@ -1,12 +1,12 @@
 package org.firstinspires.ftc.teamcode;
 
-        import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-        import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-        import com.qualcomm.robotcore.hardware.ColorSensor;
-        import com.qualcomm.robotcore.hardware.DcMotor;
-        import com.qualcomm.robotcore.hardware.DcMotorSimple;
-        import com.qualcomm.robotcore.hardware.Servo;
-        import com.qualcomm.robotcore.util.Range;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.Range;
+
+import static com.qualcomm.robotcore.hardware.Servo.MIN_POSITION;
 
 
 /*
@@ -23,31 +23,25 @@ package org.firstinspires.ftc.teamcode;
         X           X
           X       X
 */
-@TeleOp(name = "Comp Main Manual", group = "Main Manual MAC")
+@TeleOp(name = "New Test Manual", group = "Manual")
 //@Disabled
-public class CompManual extends OpMode {
+public class ManualNewTest extends OpMode {
 
-    DcMotor Front_Left;
-    DcMotor Front_Right;
-    DcMotor Back_Left;
-    DcMotor Back_Right;
-    DcMotor Glyph_Lift ;
-    DcMotor RelicArm;
-    DcMotor Pivot;
-   // ColorSensor LColor_Sensor;
-   // ColorSensor RColor_Sensor;
+    DcMotor FrontRight;
+    DcMotor FrontLeft;
+    DcMotor BackRight;
+    DcMotor BackLeft;
+    DcMotor Glyph_Lift;
     Servo LJewel_Arm;
     Servo RJewel_Arm;
     Servo LeftB_Claw;
     Servo LeftT_Claw;
     Servo RightB_Claw;
     Servo RightT_Claw;
-    Servo Relic_Servo;
-
     /**
      * Constructor
      */
-    public CompManual() {
+    public ManualNewTest() {
 
     }
 
@@ -60,38 +54,26 @@ public class CompManual extends OpMode {
 		 * that the names of the devices must match the names used when you
 		 * configured your robot and created the configuration file.
 		 */
-        Front_Left = hardwareMap.dcMotor.get("FL");
-        Front_Right = hardwareMap.dcMotor.get("FR");
-        Back_Left = hardwareMap.dcMotor.get("BL");
-        Back_Right = hardwareMap.dcMotor.get("BR");
+
+
+        FrontRight = hardwareMap.dcMotor.get("FR");
+        FrontLeft = hardwareMap.dcMotor.get("FL");
+        BackLeft = hardwareMap.dcMotor.get("BL");
+        BackRight = hardwareMap.dcMotor.get("BR");
         Glyph_Lift = hardwareMap.dcMotor.get("GL");
-        RelicArm = hardwareMap.dcMotor.get("RA");
-        Pivot = hardwareMap.dcMotor.get("P");
-        //LColor_Sensor = hardwareMap.colorSensor.get("LCS");
-        //RColor_Sensor =hardwareMap.colorSensor.get("RCS");
-        LJewel_Arm = hardwareMap.servo.get("LJA");
-        RJewel_Arm = hardwareMap.servo.get("RJA");
         LeftB_Claw = hardwareMap.servo.get("LBC");
         LeftT_Claw =hardwareMap.servo.get("LTC");
         RightB_Claw = hardwareMap.servo.get("RBC");
         RightT_Claw = hardwareMap.servo.get("RTC");
-        Relic_Servo = hardwareMap.servo.get("RS");
+        LJewel_Arm = hardwareMap.servo.get("LJA");
+        RJewel_Arm = hardwareMap.servo.get("RJA");
         //These work without reversing (Tetrix motors).
         //AndyMark motors may be opposite, in which case uncomment these lines:
         //motorFrontLeft.setDirection(DcMotor.Direction.REVERSE);
         //motorBackLeft.setDirection(DcMotor.Direction.REVERSE);
         //motorFrontRight.setDirection(DcMotor.Direction.REVERSE);
         //motorBackRight.setDirection(DcMotor.Direction.REVERSE);
-        LeftB_Claw.setDirection(Servo.Direction.FORWARD);
-        LeftT_Claw.setDirection(Servo.Direction.FORWARD);
-        // Left_ClawBot.setDirection(Servo.Direction.REVERSE);
-        RightB_Claw.setDirection(Servo.Direction.REVERSE);
-        RightT_Claw.setDirection(Servo.Direction.REVERSE);
-        // Right_ClawBot.setDirection(Servo.Direction.REVERSE);
-        Glyph_Lift.setDirection(DcMotor.Direction.FORWARD);
 
-        LJewel_Arm.setPosition(1);
-        RJewel_Arm.setPosition(1);
 
     }
 
@@ -105,44 +87,46 @@ public class CompManual extends OpMode {
         float gamepad1LeftY = -gamepad1.left_stick_y;
         float gamepad1LeftX = gamepad1.left_stick_x;
         float gamepad1RightX = gamepad1.right_stick_x;
-        float Claw = gamepad2.right_trigger;
-        float Arm = gamepad2.left_stick_y;
-        float P = gamepad2.right_stick_x;
         float Lclaw = gamepad2.left_trigger;
         float LBClaw = gamepad2.left_trigger;
         float Rclaw = gamepad2.left_trigger;
         float RBClaw = gamepad2.left_trigger;
         float Slide = gamepad2.right_stick_y;
-
         // holonomic formulas
 
-        float FrontLeft = -gamepad1LeftY - gamepad1LeftX - gamepad1RightX;
-        float FrontRight = gamepad1LeftY - gamepad1LeftX - gamepad1RightX;
-        float BackRight = gamepad1LeftY + gamepad1LeftX - gamepad1RightX;
-        float BackLeft = -gamepad1LeftY + gamepad1LeftX - gamepad1RightX;
+        float FrontL = -gamepad1LeftY - gamepad1LeftX - gamepad1RightX;
+        float FrontR = gamepad1LeftY - gamepad1LeftX - gamepad1RightX;
+        float BackR = gamepad1LeftY + gamepad1LeftX - gamepad1RightX;
+        float BackL = -gamepad1LeftY + gamepad1LeftX - gamepad1RightX;
+
+
 
         // clip the right/left values so that the values never exceed +/- 1
-        FrontRight = Range.clip(FrontRight, -1, 1);
-        FrontLeft = Range.clip(FrontLeft, -1, 1);
-        BackLeft = Range.clip(BackLeft, -1, 1);
-        BackRight = Range.clip(BackRight, -1, 1);
+        FrontR = Range.clip(FrontR, -1, 1);
+        FrontL = Range.clip(FrontL, -1, 1);
+        BackL = Range.clip(BackL, -1, 1);
+        BackR = Range.clip(BackR, -1, 1);
 
         // write the values to the motors
-        Front_Right.setPower(FrontRight);
-        Front_Left.setPower(FrontLeft);
-        Back_Left.setPower(BackLeft);
-        Back_Right.setPower(BackRight);
-        Pivot.setPower(P);
-        RelicArm.setPower(Arm);
-        Relic_Servo.setPosition(Claw);
-        LeftB_Claw.setPosition(Lclaw);
+        BackRight.setPower(BackR);
+        FrontLeft.setPower(FrontL);
+        BackLeft.setPower(BackL);
+        BackRight.setPower(BackR);
+        LeftB_Claw.setPosition(LBClaw);
         LeftT_Claw.setPosition(Lclaw);
-       // Left_ClawBot.setPosition(LBClaw);
-         RightB_Claw.setPosition(Rclaw);
+        RightB_Claw.setPosition(RBClaw);
         RightT_Claw.setPosition(Rclaw);
-     //   Right_ClawBot.setPosition(RBClaw);
         Glyph_Lift.setPower(Slide);
 
+        LeftB_Claw.setDirection(Servo.Direction.FORWARD);
+        LeftT_Claw.setDirection(Servo.Direction.FORWARD);
+        // Left_ClawBot.setDirection(Servo.Direction.REVERSE);
+        RightB_Claw.setDirection(Servo.Direction.REVERSE);
+        RightT_Claw.setDirection(Servo.Direction.REVERSE);
+        // Right_ClawBot.setDirection(Servo.Direction.REVERSE);
+        Glyph_Lift.setDirection(DcMotor.Direction.FORWARD);
+        LJewel_Arm.setDirection(Servo.Direction.REVERSE);
+        RJewel_Arm.setDirection(Servo.Direction.REVERSE);
 
 
 		/*

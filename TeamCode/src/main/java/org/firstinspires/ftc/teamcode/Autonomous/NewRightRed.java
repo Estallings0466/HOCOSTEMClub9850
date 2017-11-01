@@ -83,17 +83,7 @@ public class NewRightRed extends LinearOpMode {
         LJewel_Arm.setPosition(1);
         sleep(2000);
 
-        if (RColor_Sensor.red() >= 4 ) {
-            driveBackward_Slo((long).01);
-            sleep(1000);
-            LJewel_Arm.setPosition(1);
-            RJewel_Arm.setPosition(1);
-            sleep(500);
-            turnleft(.005);
-            driveForward_Slo2((long).2);
-            sleep(500);
-
-        } else {
+        if (RColor_Sensor.red() >= 1 ) {
             driveForward_Slo2((long).3);
             sleep(1000);
             LJewel_Arm.setPosition(1);
@@ -102,6 +92,15 @@ public class NewRightRed extends LinearOpMode {
             driveForward((long).3);
             driveForward_Slo((long).8);
             sleep(500);
+        } else {driveBackward_Slo((long).01);
+            sleep(1000);
+            LJewel_Arm.setPosition(1);
+            RJewel_Arm.setPosition(1);
+            sleep(500);
+            turnleft(.005);
+            driveForward_Slo2((long).2);
+            sleep(500);
+
         }
 
     }
