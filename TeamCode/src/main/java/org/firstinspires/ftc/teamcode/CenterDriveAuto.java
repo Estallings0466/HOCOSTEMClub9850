@@ -37,7 +37,7 @@ public class CenterDriveAuto extends OpMode {
         rightFrontMotor = hardwareMap.dcMotor.get("rightFront");
         leftBackMotor = hardwareMap.dcMotor.get("leftRear");
         rightBackMotor = hardwareMap.dcMotor.get("rightRear");
-        shooterMotor = hardwareMap.dcMotor.get("");//TODO - name hardware
+        //shooterMotor = hardwareMap.dcMotor.get("");//TODO - name hardware
         //beaconServo = hardwareMap.servo.get("");  //TODO - name hardware
 
         //beaconColorSensor = hardwareMap.colorSensor.get("color");

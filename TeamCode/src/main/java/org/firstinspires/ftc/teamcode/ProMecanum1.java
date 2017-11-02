@@ -24,7 +24,7 @@ import com.qualcomm.robotcore.util.Range;
           X       X
 */
 @TeleOp(name = "New Main Manual", group = "Mcanum Program")
-//@Disabled
+
 public class ProMecanum1 extends OpMode {
 
     DcMotor Relic_Arm;

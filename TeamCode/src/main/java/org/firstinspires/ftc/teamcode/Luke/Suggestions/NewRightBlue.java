@@ -1,14 +1,13 @@
 package org.firstinspires.ftc.teamcode.Luke.Suggestions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.ColorSensor;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
+import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
+import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 
-@Autonomous (name = "RightBNew", group = "Blue")
+@Autonomous (name = "Right BlueNew", group = "Blue")
+//@Disabled
 public class NewRightBlue extends LinearOpMode {
 
         xBotRobot robot = new xBotRobot();
@@ -16,16 +15,18 @@ public class NewRightBlue extends LinearOpMode {
         @Override
         public void runOpMode() throws InterruptedException {
             robot.init(hardwareMap);
-            robot.init(hardwareMap);
             robot.initVuforia(hardwareMap);
 
             telemetry.addData(">", "Press Play to start");
             telemetry.update();
 
+            VuforiaTrackables relicTrackables = robot.vuforia.loadTrackablesFromAsset("RelicVuMark");
+            VuforiaTrackable relicTemplate = relicTrackables.get(0);
+            waitForStart();
             //patiently waiting
             waitForStart();
-
-            RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(robot.relicTemplate);
+            relicTrackables.activate();
+            RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
 
             if (opModeIsActive()) {
             /*close the arm initially to hold glyph*/
@@ -44,11 +45,11 @@ public class NewRightBlue extends LinearOpMode {
                 }else {
                     telemetry.addData("VuMark", "%s visible", vuMark);
 
-                    robot.lowerJewelArm();
-                    if (robot.isRed()) {
+                    robot.lowerLeftArm();
+                    if (robot.isRedLeft()) {
                         robot.driveForward(.01);
                         sleep(1000);
-                        robot.raiseJewelArm();
+                        robot.raiseArms();
                         sleep(500);
                         robot.driveForward(.06);
                         sleep(1000);
@@ -59,7 +60,7 @@ public class NewRightBlue extends LinearOpMode {
                     } else {
                         robot.driveBackward(.01);
                         sleep(1000);
-                        robot.raiseJewelArm();
+                        robot.raiseArms();
                         sleep(500);
                         robot.driveForward(.03);
                         sleep(1000);

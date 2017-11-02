@@ -69,8 +69,8 @@ public class xBotRobot
      * localization engine.
      */
     VuforiaLocalizer vuforia;
-    VuforiaTrackables relicTrackables;
-    VuforiaTrackable relicTemplate;
+   // VuforiaTrackables relicTrackables;
+   // VuforiaTrackable relicTemplate;
 
     /* Constructor */
     public xBotRobot(){
@@ -85,11 +85,22 @@ public class xBotRobot
 
         // Define and Initialize MotorsFront_Left = hardwareMap.dcMotor.get("FL");
         Front_Right = hwMap.dcMotor.get("FR");
+        Front_Left = hwMap.dcMotor.get("FL");
         Back_Left = hwMap.dcMotor.get("BL");
         Back_Right = hwMap.dcMotor.get("BR");
         Glyph_Lift = hwMap.dcMotor.get("GL");
+        LJewel_Arm = hwMap.servo.get("LJA");
+        RJewel_Arm = hwMap.servo.get("RJA");
+        LeftB_Claw = hwMap.servo.get("LBC");
+        LeftT_Claw = hwMap.servo.get("LTC");
+        RightB_Claw = hwMap.servo.get("RBC");
+        RightT_Claw = hwMap.servo.get("RTC");
+        Relic_Servo = hwMap.servo.get("RS");
+        LColor_Sensor = hwMap.colorSensor.get("LCS");
+        RColor_Sensor = hwMap.colorSensor.get("RCS");
         //RelicClaw = hardwareMap.dcMotor.get("REC");
         //RelicArm = hardwareMap.dcMotor.get("RA");
+
         Front_Right.setDirection(DcMotorSimple.Direction.FORWARD);
         Back_Right.setDirection(DcMotorSimple.Direction.FORWARD);
         Front_Left.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -101,7 +112,10 @@ public class xBotRobot
         Front_Right.setPower(0);
         Back_Left.setPower(0);
         Back_Right.setPower(0);
-
+        RJewel_Arm.setPosition(1);
+        LJewel_Arm.setPosition(1);
+        LColor_Sensor.enableLed(true);
+        RColor_Sensor.enableLed(true);
         // Set all motors to run without encoders.
         // No encoders on our motors to my knowledge - Luke Sullivan
         // May want to use RUN_USING_ENCODERS if encoders are installed.
@@ -110,34 +124,25 @@ public class xBotRobot
 
         // Define and initialize ALL installed servos.
 
-        LJewel_Arm = hwMap.servo.get("LJA");
-        RJewel_Arm = hwMap.servo.get("RJA");
-        LeftB_Claw = hwMap.servo.get("LBC");
-        LeftT_Claw = hwMap.servo.get("LTC");
-        RightB_Claw = hwMap.servo.get("RBC");
-        RightT_Claw = hwMap.servo.get("RTC");
-        //Relic_Servo = hardwareMap.servo.get("RS");
 
-        RJewel_Arm.setPosition(1);
-        LJewel_Arm.setPosition(1);
+
+
 
         // Define and initialize ALL other sensors.
-        LColor_Sensor = hwMap.colorSensor.get("LCS");
-        RColor_Sensor = hwMap.colorSensor.get("RCS");
 
-        LColor_Sensor.enableLed(true);
-        RColor_Sensor.enableLed(true);
+
+
 
 
     }
 
     public void initVuforia(HardwareMap ahwMap) {
-
+        hwMap = ahwMap;
         /*
          * To start up Vuforia, tell it the view that we wish to use for camera monitor (on the RC phone);
          * If no camera monitor is desired, use the parameterless constructor instead (commented out below).
          */
-        int cameraMonitorViewId = ahwMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", ahwMap.appContext.getPackageName());
+        int cameraMonitorViewId = hwMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hwMap.appContext.getPackageName());
         VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
 
         // OR...  Do Not Activate the Camera Monitor View, to save power
@@ -155,14 +160,16 @@ public class xBotRobot
          * Once you've obtained a license key, copy the string from the Vuforia web site
          * and paste it in to your code onthe next line, between the double quotes.
          */
-        parameters.vuforiaLicenseKey = "ATsODcD/////AAAAAVw2lR...d45oGpdljdOh5LuFB9nDNfckoxb8COxKSFX";
+        parameters.vuforiaLicenseKey = "ARMl4sr/////AAAAGW7XCTx7E0rTsT4i0g6I9E8IY/EGEWdA5QHmgcnvsPFeuf+2cafgFWlJht6/m4ps4hdqUeDgqSaHurLTDfSET8oOvZUEOiMYDq2xVxNDQzW4Puz+Tl8pOFb1EfCrP28aBkcBkDfXDADiws03Ap/mD///h0HK5rVbe3KYhnefc0odh1F7ZZ1oxJy+A1w2Zb8JCXM/SWzAVvB1KEAnz87XRNeaJAon4c0gi9nLAdZlG0jnC6bx+m0140C76l14CTthmzSIdZMBkIb8/03aQIouFzLzz+K1fvXauT72TlDAbumhEak/s5pkN6L555F28Jf8KauwCnGyLnePxTm9/NKBQ4xW/bzWNpEdfY4CrBxFoSkq";
 
         /*
          * We also indicate which camera on the RC that we wish to use.
          * Here we chose the back (HiRes) camera (for greater range), but
          * for a competition robot, the front camera might be more convenient.
          */
-        parameters.cameraDirection = VuforiaLocalizer.CameraDirection.BACK;
+        parameters.cameraDirection = VuforiaLocalizer.CameraDirection.FRONT;
+        parameters.cameraMonitorFeedback = VuforiaLocalizer.Parameters.CameraMonitorFeedback.AXES; // Display Axes
+
         this.vuforia = ClassFactory.createVuforiaLocalizer(parameters);
 
         /**
@@ -171,11 +178,11 @@ public class xBotRobot
          * but differ in their instance id information.
          * @see VuMarkInstanceId
          */
-        relicTrackables = this.vuforia.loadTrackablesFromAsset("RelicVuMark");
-        relicTemplate = relicTrackables.get(0);
-        relicTemplate.setName("relicVuMarkTemplate"); // can help in debugging; otherwise not necessary
+     //   relicTrackables = this.vuforia.loadTrackablesFromAsset("RelicVuMark");
+       // relicTemplate = relicTrackables.get(0);
+        //relicTemplate.setName("relicVuMarkTemplate"); // can help in debugging; otherwise not necessary
 
-        relicTrackables.activate();
+
 
 
     }
@@ -237,9 +244,9 @@ public class xBotRobot
     }
 
     public void slewLeft(double speed) throws InterruptedException {
-        Front_Left.setPower(speed);
+        Front_Left.setPower(-speed);
         Front_Right.setPower(speed);
-        Back_Left.setPower(-speed);
+        Back_Left.setPower(speed);
         Back_Right.setPower(-speed);
 
         Thread.sleep(1000);
@@ -251,9 +258,9 @@ public class xBotRobot
     }
 
     public void slewRight(double speed) throws InterruptedException {
-        Front_Left.setPower(-speed);
+        Front_Left.setPower(speed);
         Front_Right.setPower(-speed);
-        Back_Left.setPower(speed);
+        Back_Left.setPower(-speed);
         Back_Right.setPower(speed);
 
         Thread.sleep(1000);
@@ -273,17 +280,33 @@ public class xBotRobot
 
     }
 
-    public void lowerJewelArm() throws InterruptedException {
+    public void lowerRightArm() throws InterruptedException {
         RJewel_Arm.setPosition(-1);
-        LJewel_Arm.setPosition(1);
+
     }
 
-    public void raiseJewelArm() throws InterruptedException {
+    public void lowerLeftArm() throws InterruptedException {
+
+        LJewel_Arm.setPosition(-1);
+    }
+
+    public void raiseArms() throws InterruptedException {
         RJewel_Arm.setPosition(1);
         LJewel_Arm.setPosition(1);
     }
 
-    protected boolean isRed() throws InterruptedException {
+    protected boolean isRedLeft() throws InterruptedException {
+        Thread.sleep(2000);
+        if (LColor_Sensor.red() >= 4) {
+            return true;
+        } else
+        {
+            return false;
+        }
+    }
+
+
+    protected boolean isRedRight() throws InterruptedException {
 
         Thread.sleep(2000);
         if (RColor_Sensor.red() >= 4) {
@@ -293,6 +316,7 @@ public class xBotRobot
                 return false;
             }
         }
+
 
 
 
