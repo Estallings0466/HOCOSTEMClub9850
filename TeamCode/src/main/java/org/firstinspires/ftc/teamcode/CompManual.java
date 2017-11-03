@@ -31,17 +31,17 @@ public class CompManual extends OpMode {
     DcMotor Front_Right;
     DcMotor Back_Left;
     DcMotor Back_Right;
-    DcMotor Glyph_Lift ;
+  //  DcMotor Glyph_Lift ;
     DcMotor RelicArm;
     DcMotor Pivot;
    // ColorSensor LColor_Sensor;
    // ColorSensor RColor_Sensor;
     Servo LJewel_Arm;
     Servo RJewel_Arm;
-    Servo LeftB_Claw;
-    Servo LeftT_Claw;
-    Servo RightB_Claw;
-    Servo RightT_Claw;
+  //  Servo LeftB_Claw;
+    //Servo LeftT_Claw;
+    //Servo RightB_Claw;
+    //Servo RightT_Claw;
     Servo Relic_Servo;
 
     /**
@@ -64,17 +64,17 @@ public class CompManual extends OpMode {
         Front_Right = hardwareMap.dcMotor.get("FR");
         Back_Left = hardwareMap.dcMotor.get("BL");
         Back_Right = hardwareMap.dcMotor.get("BR");
-        Glyph_Lift = hardwareMap.dcMotor.get("GL");
+        //Glyph_Lift = hardwareMap.dcMotor.get("GL");
         RelicArm = hardwareMap.dcMotor.get("RA");
         Pivot = hardwareMap.dcMotor.get("P");
         //LColor_Sensor = hardwareMap.colorSensor.get("LCS");
         //RColor_Sensor =hardwareMap.colorSensor.get("RCS");
         LJewel_Arm = hardwareMap.servo.get("LJA");
         RJewel_Arm = hardwareMap.servo.get("RJA");
-        LeftB_Claw = hardwareMap.servo.get("LBC");
-        LeftT_Claw =hardwareMap.servo.get("LTC");
-        RightB_Claw = hardwareMap.servo.get("RBC");
-        RightT_Claw = hardwareMap.servo.get("RTC");
+        //LeftB_Claw = hardwareMap.servo.get("LBC");
+        //LeftT_Claw =hardwareMap.servo.get("LTC");
+       // RightB_Claw = hardwareMap.servo.get("RBC");
+        //RightT_Claw = hardwareMap.servo.get("RTC");
         Relic_Servo = hardwareMap.servo.get("RS");
         //These work without reversing (Tetrix motors).
         //AndyMark motors may be opposite, in which case uncomment these lines:
@@ -82,13 +82,13 @@ public class CompManual extends OpMode {
         //motorBackLeft.setDirection(DcMotor.Direction.REVERSE);
         //motorFrontRight.setDirection(DcMotor.Direction.REVERSE);
         //motorBackRight.setDirection(DcMotor.Direction.REVERSE);
-        LeftB_Claw.setDirection(Servo.Direction.FORWARD);
-        LeftT_Claw.setDirection(Servo.Direction.FORWARD);
+       // LeftB_Claw.setDirection(Servo.Direction.FORWARD);
+       // LeftT_Claw.setDirection(Servo.Direction.FORWARD);
         // Left_ClawBot.setDirection(Servo.Direction.REVERSE);
-        RightB_Claw.setDirection(Servo.Direction.REVERSE);
-        RightT_Claw.setDirection(Servo.Direction.REVERSE);
+       // RightB_Claw.setDirection(Servo.Direction.REVERSE);
+        //RightT_Claw.setDirection(Servo.Direction.REVERSE);
         // Right_ClawBot.setDirection(Servo.Direction.REVERSE);
-        Glyph_Lift.setDirection(DcMotor.Direction.FORWARD);
+       // Glyph_Lift.setDirection(DcMotor.Direction.FORWARD);
 
         LJewel_Arm.setPosition(1);
         RJewel_Arm.setPosition(1);
@@ -135,13 +135,13 @@ public class CompManual extends OpMode {
         Pivot.setPower(P);
         RelicArm.setPower(Arm);
         Relic_Servo.setPosition(Claw);
-        LeftB_Claw.setPosition(Lclaw);
-        LeftT_Claw.setPosition(Lclaw);
+      //  LeftB_Claw.setPosition(Lclaw);
+       // LeftT_Claw.setPosition(Lclaw);
        // Left_ClawBot.setPosition(LBClaw);
-         RightB_Claw.setPosition(Rclaw);
-        RightT_Claw.setPosition(Rclaw);
+      //   RightB_Claw.setPosition(Rclaw);
+      //  RightT_Claw.setPosition(Rclaw);
      //   Right_ClawBot.setPosition(RBClaw);
-        Glyph_Lift.setPower(Slide);
+        // Glyph_Lift.setPower(Slide);
 
 
 
