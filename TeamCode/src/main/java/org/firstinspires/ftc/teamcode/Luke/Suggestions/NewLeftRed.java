@@ -19,19 +19,17 @@ xBotRobot robot = new xBotRobot();
 
         telemetry.addData(">", "Press Play to start");
         telemetry.update();
-        VuforiaTrackables relicTrackables = robot.vuforia.loadTrackablesFromAsset("RelicVuMark");
-        VuforiaTrackable relicTemplate = relicTrackables.get(0);
-        waitForStart();
-        //patiently waiting
+
+
         waitForStart();
 
-        RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
 
-        if (opModeIsActive()) {
+
+        while (opModeIsActive()) {
             /*close the arm initially to hold glyph*/
             robot.closeClaw(1);
             sleep(100);
-
+            RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(robot.relicTemplate);
                 /* Found an instance of the template.  */
             if (vuMark == RelicRecoveryVuMark.LEFT) {
 
@@ -43,7 +41,7 @@ xBotRobot robot = new xBotRobot();
                  /* Found an instance of the template. The following is for CENTER or UNKNOWN. */
                 telemetry.addData("VuMark", "%s visible", vuMark);
                 telemetry.update();
-            }else {
+            }else if (vuMark == RelicRecoveryVuMark.CENTER){
                 telemetry.addData("VuMark", "%s visible", vuMark);
                 telemetry.update();
 

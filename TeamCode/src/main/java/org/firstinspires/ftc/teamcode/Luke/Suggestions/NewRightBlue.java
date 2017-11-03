@@ -20,19 +20,17 @@ public class NewRightBlue extends LinearOpMode {
             telemetry.addData(">", "Press Play to start");
             telemetry.update();
 
-            VuforiaTrackables relicTrackables = robot.vuforia.loadTrackablesFromAsset("RelicVuMark");
-            VuforiaTrackable relicTemplate = relicTrackables.get(0);
-            waitForStart();
+
             //patiently waiting
             waitForStart();
-            relicTrackables.activate();
-            RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
 
-            if (opModeIsActive()) {
+
+
+            while (opModeIsActive()) {
             /*close the arm initially to hold glyph*/
                 robot.closeClaw(1);
                 sleep(100);
-
+                RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(robot.relicTemplate);
                 /* Found an instance of the template.  */
                 if (vuMark == RelicRecoveryVuMark.LEFT) {
 
@@ -42,7 +40,7 @@ public class NewRightBlue extends LinearOpMode {
                 }else if(vuMark == RelicRecoveryVuMark.RIGHT){
                  /* Found an instance of the template. The following is for CENTER or UNKNOWN. */
                     telemetry.addData("VuMark", "%s visible", vuMark);
-                }else {
+                }else if(vuMark == RelicRecoveryVuMark.CENTER){
                     telemetry.addData("VuMark", "%s visible", vuMark);
 
                     robot.lowerLeftArm();

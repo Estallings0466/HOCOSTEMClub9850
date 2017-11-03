@@ -69,8 +69,8 @@ public class xBotRobot
      * localization engine.
      */
     VuforiaLocalizer vuforia;
-   // VuforiaTrackables relicTrackables;
-   // VuforiaTrackable relicTemplate;
+    VuforiaTrackables relicTrackables;
+    VuforiaTrackable relicTemplate;
 
     /* Constructor */
     public xBotRobot(){
@@ -178,11 +178,11 @@ public class xBotRobot
          * but differ in their instance id information.
          * @see VuMarkInstanceId
          */
-     //   relicTrackables = this.vuforia.loadTrackablesFromAsset("RelicVuMark");
-       // relicTemplate = relicTrackables.get(0);
-        //relicTemplate.setName("relicVuMarkTemplate"); // can help in debugging; otherwise not necessary
+        relicTrackables = this.vuforia.loadTrackablesFromAsset("RelicVuMark");
+        relicTemplate = relicTrackables.get(0);
+        relicTemplate.setName("relicVuMarkTemplate"); // can help in debugging; otherwise not necessary
 
-
+        relicTrackables.activate();
 
 
     }

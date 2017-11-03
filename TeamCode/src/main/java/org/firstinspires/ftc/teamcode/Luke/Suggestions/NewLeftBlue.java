@@ -20,12 +20,11 @@ public class NewLeftBlue extends LinearOpMode {
 
         telemetry.addData(">", "Press Play to start");
         telemetry.update();
-        VuforiaTrackables relicTrackables = robot.vuforia.loadTrackablesFromAsset("RelicVuMark");
-        VuforiaTrackable relicTemplate = relicTrackables.get(0);
-        waitForStart();
+
+
         //patiently waiting
         waitForStart();
-        relicTrackables.activate();
+
 
 
 
@@ -33,7 +32,7 @@ public class NewLeftBlue extends LinearOpMode {
             /*close the arm initially to hold glyph*/
             robot.closeClaw(1);
             sleep(100);
-            RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
+            RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(robot.relicTemplate);
                 /* Found an instance of the template.  */
             if (vuMark == RelicRecoveryVuMark.LEFT) {
                 robot.lowerLeftArm();
@@ -66,8 +65,6 @@ public class NewLeftBlue extends LinearOpMode {
                 robot.slewLeft(1);
                 robot.turnLeft(1);
                 robot.turnRight(1);
-
-            } else {
 
             }
 
