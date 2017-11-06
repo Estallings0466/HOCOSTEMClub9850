@@ -12,7 +12,7 @@ package org.firstinspires.ftc.teamcode.LJA;
 /**
  * Created by Jack on 10/21/2017.
  */
-
+@Disabled
 @Autonomous (name="Right_Balance", group= "Linear OpMode")
 //@Disabled
 

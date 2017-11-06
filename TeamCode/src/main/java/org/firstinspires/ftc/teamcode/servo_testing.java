@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.ColorSensor;
@@ -9,6 +10,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 /**
  * Created by emmab on 9/20/2017.
  */
+@Disabled
 @TeleOp (name = "Arm testing", group = "Testing")
 public class servo_testing extends OpMode {
     DcMotor Front_Left;
