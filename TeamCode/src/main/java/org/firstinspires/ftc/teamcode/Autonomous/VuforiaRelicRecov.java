@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.Autonomous;
 
         import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+        import com.qualcomm.robotcore.eventloop.opmode.Disabled;
         import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
         import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
         import com.qualcomm.robotcore.hardware.DcMotor;
@@ -22,6 +23,7 @@ package org.firstinspires.ftc.teamcode.Autonomous;
 /**
  * Created by Lane Doak of Recharged Orange on 9/9/17.
  */
+@Disabled
 @Autonomous(name = "VuforiaRelic", group = "Vuforia")
 public class VuforiaRelicRecov extends LinearOpMode
 {

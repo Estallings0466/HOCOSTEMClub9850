@@ -61,24 +61,28 @@ public class NewRightRed extends LinearOpMode {
                 telemetry.addData("VuMark", "%s visible", vuMark);
                 robot.lowerRightArm();
                 if (robot.isRedRight()) {
-                    robot.driveBackward(.01);
+                    robot.driveBackward(.1);
                     sleep(1000);
                     robot.raiseArms();
                     sleep(500);
-                    robot.turnLeft(.005);
                     robot.driveForward(.2);
-                    sleep(500);
+
 
                 } else {
-                    robot.driveForward(.01);
+                    robot.driveForward(.1);
                     sleep(1000);
                     robot.raiseArms();
                     sleep(500);
-                    robot.turnRight(.3);
-                    robot.driveForward(1.1);
-                    sleep(500);
+
                 }
+<<<<<<< Updated upstream
             }else if (vuMark == RelicRecoveryVuMark.CENTER){
+=======
+                robot.driveForward(.5);
+                robot.slewRight(1);
+                stop();
+            }else {
+>>>>>>> Stashed changes
                 telemetry.addData("VuMark", "%s visible", vuMark);
 
                 robot.lowerRightArm();
