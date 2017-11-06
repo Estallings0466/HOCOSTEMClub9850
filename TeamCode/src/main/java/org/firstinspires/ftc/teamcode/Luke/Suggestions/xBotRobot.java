@@ -38,16 +38,11 @@ public class xBotRobot
     DcMotor Back_Left;
     DcMotor Back_Right;
     DcMotor Glyph_Lift;
-    DcMotor RelicClaw;
-    DcMotor RelicArm;
+    DcMotor Glyph_Claw;
     ColorSensor LColor_Sensor;
     ColorSensor RColor_Sensor;
     Servo LJewel_Arm;
     Servo RJewel_Arm;
-    Servo LeftB_Claw;
-    Servo LeftT_Claw;
-    Servo RightB_Claw;
-    Servo RightT_Claw;
     Servo Relic_Servo;
 
     public static final double MID_SERVO       =  0.5 ;
@@ -89,17 +84,13 @@ public class xBotRobot
         Back_Left = hwMap.dcMotor.get("BL");
         Back_Right = hwMap.dcMotor.get("BR");
         Glyph_Lift = hwMap.dcMotor.get("GL");
+        Glyph_Claw = hwMap.dcMotor.get("GC");
         LJewel_Arm = hwMap.servo.get("LJA");
         RJewel_Arm = hwMap.servo.get("RJA");
-        LeftB_Claw = hwMap.servo.get("LBC");
-        LeftT_Claw = hwMap.servo.get("LTC");
-        RightB_Claw = hwMap.servo.get("RBC");
-        RightT_Claw = hwMap.servo.get("RTC");
         Relic_Servo = hwMap.servo.get("RS");
         LColor_Sensor = hwMap.colorSensor.get("LCS");
         RColor_Sensor = hwMap.colorSensor.get("RCS");
-        //RelicClaw = hardwareMap.dcMotor.get("REC");
-        //RelicArm = hardwareMap.dcMotor.get("RA");
+
 
         Front_Right.setDirection(DcMotorSimple.Direction.FORWARD);
         Back_Right.setDirection(DcMotorSimple.Direction.FORWARD);
@@ -249,7 +240,7 @@ public class xBotRobot
         Back_Left.setPower(speed);
         Back_Right.setPower(-speed);
 
-        Thread.sleep(1000);
+        Thread.sleep(500);
 
         Front_Left.setPower(0);
         Front_Right.setPower(0);
@@ -263,7 +254,7 @@ public class xBotRobot
         Back_Left.setPower(-speed);
         Back_Right.setPower(speed);
 
-        Thread.sleep(1000);
+        Thread.sleep(500);
 
         Front_Left.setPower(0);
         Front_Right.setPower(0);
@@ -272,22 +263,18 @@ public class xBotRobot
     }
 
 
-    public void closeClaw(double claw) throws InterruptedException {
-        LeftB_Claw.setPosition(1);
-        LeftT_Claw.setPosition(1);
-        RightB_Claw.setPosition(-1);
-        RightT_Claw.setPosition(-1);
-
+    public void closeClaw(double speed) throws InterruptedException {
+        Glyph_Claw.setPower(speed);
     }
 
     public void lowerRightArm() throws InterruptedException {
-        RJewel_Arm.setPosition(-1);
+        LJewel_Arm.setPosition(-1);
 
     }
 
     public void lowerLeftArm() throws InterruptedException {
 
-        LJewel_Arm.setPosition(-1);
+        RJewel_Arm.setPosition(-1);
     }
 
     public void raiseArms() throws InterruptedException {

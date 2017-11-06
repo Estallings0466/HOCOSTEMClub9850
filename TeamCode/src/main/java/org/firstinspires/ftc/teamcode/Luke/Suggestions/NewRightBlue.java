@@ -6,69 +6,111 @@ import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 
-@Autonomous (name = "Right BlueNew", group = "Blue")
+@Autonomous (name = "Right BlueNew", group = "Use These")
 //@Disabled
 public class NewRightBlue extends LinearOpMode {
 
-        xBotRobot robot = new xBotRobot();
+    xBotRobot robot = new xBotRobot();
 
-        @Override
-        public void runOpMode() throws InterruptedException {
-            robot.init(hardwareMap);
-            robot.initVuforia(hardwareMap);
+    @Override
+    public void runOpMode() throws InterruptedException {
+        robot.init(hardwareMap);
+        robot.initVuforia(hardwareMap);
 
-            telemetry.addData(">", "Press Play to start");
-            telemetry.update();
+        telemetry.addData(">", "Press Play to start");
+        telemetry.update();
 
-            VuforiaTrackables relicTrackables = robot.vuforia.loadTrackablesFromAsset("RelicVuMark");
-            VuforiaTrackable relicTemplate = relicTrackables.get(0);
-            waitForStart();
-            //patiently waiting
-            waitForStart();
-            relicTrackables.activate();
-            RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
+        VuforiaTrackables relicTrackables = robot.vuforia.loadTrackablesFromAsset("RelicVuMark");
+        VuforiaTrackable relicTemplate = relicTrackables.get(0);
+        waitForStart();
+        //patiently waiting
+        waitForStart();
+        relicTrackables.activate();
 
-            if (opModeIsActive()) {
+        while (opModeIsActive()) {
             /*close the arm initially to hold glyph*/
-                robot.closeClaw(1);
-                sleep(100);
-
+            robot.closeClaw(1);
+            sleep(100);
+            RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
                 /* Found an instance of the template.  */
-                if (vuMark == RelicRecoveryVuMark.LEFT) {
+            if (vuMark == RelicRecoveryVuMark.LEFT) {
+                telemetry.addData("VuMark", "%s visible", vuMark);
+                telemetry.update();
+                robot.lowerLeftArm();
+                if (robot.isRedLeft()) {
+                    robot.driveForward(.45);
+                    sleep(1000);
+                    robot.raiseArms();
+                    sleep(500);
 
 
-                    telemetry.addData("VuMark", "%s visible", vuMark);
+                } else {
+                    robot.driveBackward(.45);
+                    sleep(1000);
+                    robot.raiseArms();
+                    sleep(500);
+                    robot.driveForward(.45);
 
-                }else if(vuMark == RelicRecoveryVuMark.RIGHT){
-                 /* Found an instance of the template. The following is for CENTER or UNKNOWN. */
-                    telemetry.addData("VuMark", "%s visible", vuMark);
-                }else {
-                    telemetry.addData("VuMark", "%s visible", vuMark);
-
-                    robot.lowerLeftArm();
-                    if (robot.isRedLeft()) {
-                        robot.driveForward(.01);
-                        sleep(1000);
-                        robot.raiseArms();
-                        sleep(500);
-                        robot.driveForward(.06);
-                        sleep(1000);
-                        robot.driveBackward(.03);
-                        sleep(1000);
-
-
-                    } else {
-                        robot.driveBackward(.01);
-                        sleep(1000);
-                        robot.raiseArms();
-                        sleep(500);
-                        robot.driveForward(.03);
-                        sleep(1000);
-
-                    }
                 }
-            }
+                robot.driveForward(.3);
+                robot.slewRight(1);
+                stop();
+            } else if (vuMark == RelicRecoveryVuMark.RIGHT) {
+                 /* Found an instance of the template. The following is for CENTER or UNKNOWN. */
+                telemetry.addData("VuMark", "%s visible", vuMark);
+                telemetry.update();
+                robot.lowerLeftArm();
+                if (robot.isRedLeft()) {
+                    robot.driveForward(.45);
+                    sleep(1000);
+                    robot.raiseArms();
+                    sleep(500);
 
+
+                } else {
+                    robot.driveBackward(.45);
+                    sleep(1000);
+                    robot.raiseArms();
+                    sleep(500);
+
+
+
+                    robot.driveForward(1);
+
+                }
+                robot.driveForward(.3);
+                robot.slewRight(1);
+                stop();
+            } else {
+                telemetry.addData("VuMark", "%s visible", vuMark);
+                telemetry.update();
+                robot.lowerLeftArm();
+                if (robot.isRedLeft()) {
+                    robot.driveForward(.45);
+                    sleep(1000);
+                    robot.raiseArms();
+                    sleep(500);
+
+
+                } else {
+                    robot.driveBackward(.45);
+                    sleep(1000);
+                    robot.raiseArms();
+                    sleep(500);
+
+
+
+                    robot.driveForward(1);
+
+                }
+                robot.driveForward(.3);
+                robot.slewRight(1);
+                stop();
+            }
         }
+
     }
+}
+
+
 

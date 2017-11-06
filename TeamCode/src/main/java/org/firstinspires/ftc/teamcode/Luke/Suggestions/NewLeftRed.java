@@ -34,36 +34,74 @@ xBotRobot robot = new xBotRobot();
 
                 /* Found an instance of the template.  */
             if (vuMark == RelicRecoveryVuMark.LEFT) {
-
-
                 telemetry.addData("VuMark", "%s visible", vuMark);
                 telemetry.update();
+                robot.lowerRightArm();
+                if (robot.isRedRight()) {
+                    robot.driveBackward(.1);
+                    sleep(1000);
+                    robot.raiseArms();
+                    sleep(500);
+                    robot.driveForward(.2);
+
+
+                } else {
+                    robot.driveForward(.1);
+                    sleep(1000);
+                    robot.raiseArms();
+                    sleep(500);
+
+                }
+                robot.driveForward(.5);
+                robot.slewLeft(.5);
+                stop();
 
             }else if(vuMark == RelicRecoveryVuMark.RIGHT){
                  /* Found an instance of the template. The following is for CENTER or UNKNOWN. */
                 telemetry.addData("VuMark", "%s visible", vuMark);
                 telemetry.update();
+                robot.lowerRightArm();
+                if (robot.isRedRight()) {
+                    robot.driveBackward(.1);
+                    sleep(1000);
+                    robot.raiseArms();
+                    sleep(500);
+                    robot.driveForward(.2);
+
+
+                } else {
+                    robot.driveForward(.1);
+                    sleep(1000);
+                    robot.raiseArms();
+                    sleep(500);
+
+                }
+                robot.driveForward(.5);
+                robot.slewLeft(.5);
+                stop();
             }else {
                 telemetry.addData("VuMark", "%s visible", vuMark);
                 telemetry.update();
 
                 robot.lowerRightArm();
                 if (robot.isRedRight()) {
-                    robot.driveBackward(.01);
+                    robot.driveBackward(.1);
                     sleep(1000);
                     robot.raiseArms();
                     sleep(500);
-                    robot.turnLeft(.005);
                     robot.driveForward(.2);
-                    sleep(500);
+
 
                 } else {
-                    robot.driveForward(.01);
+                    robot.driveForward(.1);
                     sleep(1000);
                     robot.raiseArms();
                     sleep(500);
 
                 }
+                robot.driveForward(.5);
+                robot.slewLeft(.5);
+                stop();
             }
         }
 
