@@ -22,8 +22,6 @@ public class Manual extends OpMode {
     DcMotor Back_Right;
     DcMotor Glyph_Lift;
     DcMotor Glyph_Claw;
-    DcMotor Relic_Arm;
-    DcMotor Relic_Claw;
     Servo LJewel_Arm;
     Servo RJewel_Arm;
 
@@ -52,15 +50,11 @@ public class Manual extends OpMode {
         Back_Right = hardwareMap.dcMotor.get("BR");
         Glyph_Lift = hardwareMap.dcMotor.get("GL");
         Glyph_Claw = hardwareMap.dcMotor.get("GC");
-        Relic_Arm = hardwareMap.dcMotor.get("RA");
-        Relic_Claw = hardwareMap.dcMotor.get("RC");
         LJewel_Arm = hardwareMap.servo.get("LJA");
         RJewel_Arm = hardwareMap.servo.get("RJA");
 
         //These work without reversing (Tetrix motors).
         //AndyMark motors may be opposite, in which case uncomment these lines:
-        Front_Left.setDirection(DcMotor.Direction.REVERSE);
-        Back_Left.setDirection(DcMotor.Direction.REVERSE);
         LJewel_Arm.setPosition(1);
         RJewel_Arm.setPosition(1);
     }
@@ -75,10 +69,8 @@ public class Manual extends OpMode {
         float gamepad1LeftY = -gamepad1.left_stick_y;
         float gamepad1LeftX = gamepad1.left_stick_x;
         float gamepad1RightX = gamepad1.right_stick_x;
-        float RelicClaw = gamepad2.right_trigger;
-        float RelicArm = gamepad2.right_stick_y;
         float GlyphLift = gamepad2.left_stick_y;
-        float GlyphClaw = gamepad2.left_trigger;
+        float GlyphClaw = gamepad2.right_stick_y;
 
 
         // holonomic formulas
@@ -99,8 +91,6 @@ public class Manual extends OpMode {
         Front_Left.setPower(FrontLeft);
         Back_Left.setPower(BackLeft);
         Back_Right.setPower(BackRight);
-        Relic_Arm.setPower(RelicArm);
-        Relic_Claw.setPower(RelicClaw);
         Glyph_Claw.setPower(GlyphClaw);
         Glyph_Lift.setPower(GlyphLift);
 
@@ -119,10 +109,10 @@ public class Manual extends OpMode {
 
     }
 
-    @Override
-    public void stop() {
+    //@Override
+    //public void stop() {
 
-    }
+    //}
 
     /*
      * This method scales the joystick input so for low joystick values, the

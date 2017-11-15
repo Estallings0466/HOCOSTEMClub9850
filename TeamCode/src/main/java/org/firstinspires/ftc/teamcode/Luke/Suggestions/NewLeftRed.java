@@ -6,8 +6,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 
-@Autonomous (name = "Left RedNew", group = "Red")
-//@Disabled
+@Autonomous (name = "Left RedNew", group = "Main")
+
 public class NewLeftRed extends LinearOpMode {
 
 xBotRobot robot = new xBotRobot();
@@ -32,36 +32,57 @@ xBotRobot robot = new xBotRobot();
             RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(robot.relicTemplate);
                 /* Found an instance of the template.  */
             if (vuMark == RelicRecoveryVuMark.LEFT) {
-
-
                 telemetry.addData("VuMark", "%s visible", vuMark);
                 telemetry.update();
+
 
             }else if(vuMark == RelicRecoveryVuMark.RIGHT){
                  /* Found an instance of the template. The following is for CENTER or UNKNOWN. */
                 telemetry.addData("VuMark", "%s visible", vuMark);
                 telemetry.update();
-            }else if (vuMark == RelicRecoveryVuMark.CENTER){
+            } else {
                 telemetry.addData("VuMark", "%s visible", vuMark);
-                telemetry.update();
 
-                robot.lowerRightArm();
-                if (robot.isRedRight()) {
-                    robot.driveBackward(.01);
-                    sleep(1000);
+                robot.lowerLeftArm();
+                sleep(1000);
+                if (robot.isRedLeft()) {
+                    robot.closeClaw(.5);
+                    Thread.sleep(1000);
+                    robot.liftGlyph(1);
+                    Thread.sleep(1000);
+                    robot.driveForward(.15);
+                    Thread.sleep(500);
                     robot.raiseArms();
-                    sleep(500);
-                    robot.turnLeft(.005);
-                    robot.driveForward(.2);
-                    sleep(500);
+                    Thread.sleep(500);
+                    robot.turnRight(.3);
+                    robot.driveForward(.4);
+                    Thread.sleep(1000);
+                    robot.openClaw(1);
+                    Thread.sleep(1000);
+                    robot.driveBackward(.1);
+
+
+
 
                 } else {
-                    robot.driveForward(.01);
-                    sleep(1000);
-                    robot.raiseArms();
-                    sleep(500);
+
+                    robot.closeClaw(.5);
+                    Thread.sleep(1000);
+                    robot.liftGlyph(1)
+                    ;robot.driveBackward(.5);
+                    Thread.sleep(1000);
+                    robot.driveForward(.15);
+                    Thread.sleep(500);
+                    robot.turnRight(.3);
+                    robot.driveForward(.4);
+                    Thread.sleep(1000);
+                    robot.openClaw(1);
+                    Thread.sleep(1000);
+                    robot.driveBackward(.1);
+                    stop();
 
                 }
+                stop();
             }
         }
 

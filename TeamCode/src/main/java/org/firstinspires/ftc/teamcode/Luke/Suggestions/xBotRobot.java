@@ -2,8 +2,8 @@ package org.firstinspires.ftc.teamcode.Luke.Suggestions;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
@@ -39,11 +39,10 @@ public class xBotRobot
     DcMotor Back_Right;
     DcMotor Glyph_Lift;
     DcMotor Glyph_Claw;
-    ColorSensor LColor_Sensor;
-    ColorSensor RColor_Sensor;
+    public ColorSensor LColor_Sensor;
+    public ColorSensor RColor_Sensor;
     Servo LJewel_Arm;
     Servo RJewel_Arm;
-    Servo Relic_Servo;
 
     public static final double MID_SERVO       =  0.5 ;
     public static final double ARM_UP_POWER    =  0.45 ;
@@ -87,7 +86,6 @@ public class xBotRobot
         Glyph_Claw = hwMap.dcMotor.get("GC");
         LJewel_Arm = hwMap.servo.get("LJA");
         RJewel_Arm = hwMap.servo.get("RJA");
-        Relic_Servo = hwMap.servo.get("RS");
         LColor_Sensor = hwMap.colorSensor.get("LCS");
         RColor_Sensor = hwMap.colorSensor.get("RCS");
 
@@ -236,9 +234,10 @@ public class xBotRobot
 
     public void slewLeft(double speed) throws InterruptedException {
         Front_Left.setPower(-speed);
+        Back_Right.setPower(-speed);
         Front_Right.setPower(speed);
         Back_Left.setPower(speed);
-        Back_Right.setPower(-speed);
+
 
         Thread.sleep(500);
 
@@ -250,9 +249,10 @@ public class xBotRobot
 
     public void slewRight(double speed) throws InterruptedException {
         Front_Left.setPower(speed);
+        Back_Right.setPower(speed);
         Front_Right.setPower(-speed);
         Back_Left.setPower(-speed);
-        Back_Right.setPower(speed);
+
 
         Thread.sleep(500);
 
@@ -264,17 +264,31 @@ public class xBotRobot
 
 
     public void closeClaw(double speed) throws InterruptedException {
+        Glyph_Claw.setPower(-speed);
+        Thread.sleep(1000);
+        Glyph_Claw.setPower(0);
+    }
+
+    public void openClaw(double speed) throws InterruptedException{
         Glyph_Claw.setPower(speed);
+        Thread.sleep(1000);
+        Glyph_Claw.setPower(0);
+    }
+
+    public void liftGlyph(double speed) throws InterruptedException {
+        Glyph_Lift.setPower(speed);
+        Thread.sleep(1000);
+        Glyph_Lift.setPower(0);
     }
 
     public void lowerRightArm() throws InterruptedException {
-        LJewel_Arm.setPosition(-1);
+        RJewel_Arm.setPosition(-1);
 
     }
 
     public void lowerLeftArm() throws InterruptedException {
 
-        RJewel_Arm.setPosition(-1);
+        LJewel_Arm.setPosition(-1);
     }
 
     public void raiseArms() throws InterruptedException {
@@ -282,9 +296,9 @@ public class xBotRobot
         LJewel_Arm.setPosition(1);
     }
 
-    protected boolean isRedLeft() throws InterruptedException {
-        Thread.sleep(2000);
-        if (LColor_Sensor.red() >= 4) {
+    public boolean isRedLeft() throws InterruptedException {
+        //Thread.sleep(2000);
+        if (LColor_Sensor.red() >= 0 && LColor_Sensor.blue() == 0) {
             return true;
         } else
         {
@@ -293,10 +307,10 @@ public class xBotRobot
     }
 
 
-    protected boolean isRedRight() throws InterruptedException {
+    public boolean isRedRight() throws InterruptedException {
 
-        Thread.sleep(2000);
-        if (RColor_Sensor.red() >= 4) {
+      //  Thread.sleep(2000);
+        if (RColor_Sensor.red() >= 3) {
             return true;
         } else
             {

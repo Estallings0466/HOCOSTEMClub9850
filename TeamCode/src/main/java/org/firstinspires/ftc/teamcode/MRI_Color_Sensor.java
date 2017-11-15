@@ -14,7 +14,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 @Autonomous (name = "Color Sensor", group = "MRI")
 @Disabled
-public class MRI_Color_Sensor extends OpMode {
+public class
+MRI_Color_Sensor extends OpMode {
 
     /* Declare OpMode members. */
     private ElapsedTime runtime = new ElapsedTime();

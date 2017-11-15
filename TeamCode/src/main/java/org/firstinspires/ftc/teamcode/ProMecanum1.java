@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -24,7 +25,7 @@ import com.qualcomm.robotcore.util.Range;
           X       X
 */
 @TeleOp(name = "New Main Manual", group = "Mcanum Program")
-
+@Disabled
 public class ProMecanum1 extends OpMode {
 
     DcMotor Relic_Arm;

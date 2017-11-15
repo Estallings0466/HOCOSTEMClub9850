@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.ColorSensor;
@@ -12,6 +13,7 @@ import com.qualcomm.robotcore.hardware.Servo;
  * Created by emmab on 10/6/2017.
  */
 @TeleOp (name = "ProManual", group = "Omni manual" )
+@Disabled
 public class ProManual extends OpMode{
     DcMotor Front_Left;
     DcMotor Front_Right;

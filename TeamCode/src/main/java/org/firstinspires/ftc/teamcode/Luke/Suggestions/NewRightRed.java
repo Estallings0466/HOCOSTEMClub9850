@@ -6,7 +6,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 
-@Autonomous (name = "Right RedNew", group = "Red")
+@Autonomous (name = "Right RedNew", group = "Main")
 
 public class NewRightRed extends LinearOpMode {
 
@@ -33,27 +33,28 @@ public class NewRightRed extends LinearOpMode {
             RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(robot.relicTemplate);
                 /* Found an instance of the template.  */
             if (vuMark == RelicRecoveryVuMark.LEFT) {
-
-
                 telemetry.addData("VuMark", "%s visible", vuMark);
                 robot.lowerRightArm();
                 if (robot.isRedRight()) {
                     robot.driveBackward(.1);
-                    sleep(1000);
+                    Thread.sleep(1000);
                     robot.raiseArms();
-                    sleep(500);
+                    Thread.sleep(500);
                     robot.driveForward(.2);
+                    Thread.sleep(500);
+                    robot.slewLeft(.5);
+
 
 
                 } else {
                     robot.driveForward(.1);
-                    sleep(1000);
+                    Thread.sleep(1000);
                     robot.raiseArms();
-                    sleep(500);
+                    Thread.sleep(500);
+                    robot.slewLeft(.5);
 
                 }
                 robot.driveForward(.5);
-                robot.slewRight(1);
                 stop();
 
             }else if(vuMark == RelicRecoveryVuMark.RIGHT){
@@ -62,48 +63,50 @@ public class NewRightRed extends LinearOpMode {
                 robot.lowerRightArm();
                 if (robot.isRedRight()) {
                     robot.driveBackward(.1);
-                    sleep(1000);
+                    Thread.sleep(1000);
                     robot.raiseArms();
-                    sleep(500);
+                    Thread.sleep(500);
                     robot.driveForward(.2);
+                    Thread.sleep(500);
+                    robot.slewLeft(.7);
+
 
 
                 } else {
                     robot.driveForward(.1);
-                    sleep(1000);
+                    Thread.sleep(1000);
                     robot.raiseArms();
-                    sleep(500);
+                    Thread.sleep(500);
+                    robot.slewLeft(.7);
 
                 }
-<<<<<<< Updated upstream
-            }else if (vuMark == RelicRecoveryVuMark.CENTER){
-=======
                 robot.driveForward(.5);
-                robot.slewRight(1);
                 stop();
             }else {
->>>>>>> Stashed changes
                 telemetry.addData("VuMark", "%s visible", vuMark);
 
                 robot.lowerRightArm();
                 if (robot.isRedRight()) {
-                    robot.driveBackward(.01);
-                    sleep(1000);
+                    robot.driveBackward(.1);
+                    Thread.sleep(1000);
                     robot.raiseArms();
-                    sleep(500);
-                    robot.turnLeft(.005);
+                    Thread.sleep(500);
                     robot.driveForward(.2);
-                    sleep(500);
+                    Thread.sleep(500);
+                    robot.slewLeft(.6);
+
+
 
                 } else {
-                    robot.driveForward(.01);
-                    sleep(1000);
+                    robot.driveForward(.1);
+                    Thread.sleep(1000);
                     robot.raiseArms();
-                    sleep(500);
-                    robot.turnRight(.3);
-                    robot.driveForward(1.1);
-                    sleep(500);
+                    Thread.sleep(500);
+                    robot.slewLeft(.6);
+
                 }
+                robot.driveForward(.5);
+                stop();
             }
         }
 

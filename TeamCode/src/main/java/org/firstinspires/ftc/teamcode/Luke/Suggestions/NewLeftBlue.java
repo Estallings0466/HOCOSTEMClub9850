@@ -7,7 +7,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 
-@Autonomous (name = "Left BlueNew", group = "Blue")
+@Autonomous (name = "Left BlueNew", group = "Main")
 
 public class NewLeftBlue extends LinearOpMode {
 
@@ -26,8 +26,6 @@ public class NewLeftBlue extends LinearOpMode {
         waitForStart();
 
 
-
-
         while (opModeIsActive()) {
             /*close the arm initially to hold glyph*/
             robot.closeClaw(1);
@@ -35,12 +33,25 @@ public class NewLeftBlue extends LinearOpMode {
             RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(robot.relicTemplate);
                 /* Found an instance of the template.  */
             if (vuMark == RelicRecoveryVuMark.LEFT) {
+                telemetry.addData("VuMark", "%s visible", vuMark);
+                telemetry.update();
+
                 robot.lowerLeftArm();
                 if (robot.isRedLeft()) {
-                    robot.driveForward(.1);
-                    sleep(1000);
+                    robot.closeClaw(.5);
+                    Thread.sleep(1000);
+                    robot.driveForward(.5);
+                    Thread.sleep(500);
                     robot.raiseArms();
-                    sleep(500);
+                    robot.liftGlyph(1);
+                    Thread.sleep(1000);
+                    robot.driveForward(.2);
+                    Thread.sleep(500);
+                    robot.turnLeft(.3);
+                    robot.driveForward(.4);
+                    Thread.sleep(1000);
+                    robot.openClaw(1);
+                    Thread.sleep(1000);
 
 
                 } else {
@@ -48,26 +59,114 @@ public class NewLeftBlue extends LinearOpMode {
                     sleep(1000);
                     robot.raiseArms();
                     sleep(500);
-
-
-                    telemetry.addData("VuMark", "%s visible", vuMark);
-                    telemetry.update();
+                    robot.closeClaw(.5);
+                    Thread.sleep(1000);
+                    robot.driveForward(.5);
+                    Thread.sleep(500);
+                    robot.raiseArms();
+                    robot.liftGlyph(1);
+                    Thread.sleep(1000);
+                    robot.driveForward(.2);
+                    Thread.sleep(500);
+                    robot.turnLeft(.3);
+                    robot.driveForward(.4);
+                    Thread.sleep(1000);
+                    robot.openClaw(1);
+                    Thread.sleep(1000);
 
                 }
-            }else if (vuMark == RelicRecoveryVuMark.RIGHT) {
-                 /* Found an instance of the template. The following is for CENTER or UNKNOWN. */
-                    telemetry.addData("VuMark", "%s visible", vuMark);
-                    telemetry.update();
+                stop();
 
-            } else if (vuMark == RelicRecoveryVuMark.CENTER) {
+            } else if (vuMark == RelicRecoveryVuMark.RIGHT) {
+                 /* Found an instance of the template. The following is for CENTER or UNKNOWN. */
                 telemetry.addData("VuMark", "%s visible", vuMark);
                 telemetry.update();
-                robot.slewLeft(1);
-                robot.turnLeft(1);
-                robot.turnRight(1);
+                if (robot.isRedLeft()) {
+                    robot.closeClaw(.5);
+                    Thread.sleep(1000);
+                    robot.driveForward(.5);
+                    Thread.sleep(500);
+                    robot.raiseArms();
+                    robot.liftGlyph(1);
+                    Thread.sleep(1000);
+                    robot.driveForward(.2);
+                    Thread.sleep(500);
+                    robot.turnLeft(.3);
+                    robot.driveForward(.4);
+                    Thread.sleep(1000);
+                    robot.openClaw(1);
+                    Thread.sleep(1000);
+
+
+                } else {
+                    robot.driveBackward(.1);
+                    sleep(1000);
+                    robot.raiseArms();
+                    sleep(500);
+                    robot.closeClaw(.5);
+                    Thread.sleep(1000);
+                    robot.driveForward(.5);
+                    Thread.sleep(500);
+                    robot.raiseArms();
+                    robot.liftGlyph(1);
+                    Thread.sleep(1000);
+                    robot.driveForward(.2);
+                    Thread.sleep(500);
+                    robot.turnLeft(.3);
+                    robot.driveForward(.4);
+                    Thread.sleep(1000);
+                    robot.openClaw(1);
+                    Thread.sleep(1000);
+
+                }
+                stop();
+
+            } else {
+                telemetry.addData("VuMark", "%s visible", vuMark);
+
+                robot.lowerLeftArm();
+                sleep(1000);
+                if (robot.isRedLeft()) {
+                    robot.closeClaw(.5);
+                    Thread.sleep(1000);
+                    robot.driveForward(.5);
+                    Thread.sleep(500);
+                    robot.raiseArms();
+                    robot.liftGlyph(1);
+                    Thread.sleep(1000);
+                    robot.driveForward(.2);
+                    Thread.sleep(500);
+                    robot.turnLeft(.3);
+                    robot.driveForward(.4);
+                    Thread.sleep(1000);
+                    robot.openClaw(1);
+                    Thread.sleep(1000);
+
+
+                } else {
+                    robot.driveBackward(.1);
+                    sleep(1000);
+                    robot.raiseArms();
+                    sleep(500);
+                    robot.closeClaw(.5);
+                    Thread.sleep(1000);
+                    robot.driveForward(.5);
+                    Thread.sleep(500);
+                    robot.raiseArms();
+                    robot.liftGlyph(1);
+                    Thread.sleep(1000);
+                    robot.driveForward(.2);
+                    Thread.sleep(500);
+                    robot.turnLeft(.3);
+                    robot.driveForward(.4);
+                    Thread.sleep(1000);
+                    robot.openClaw(1);
+                    Thread.sleep(1000);
+
+                }
+                stop();
 
             }
-
         }
     }
 }
