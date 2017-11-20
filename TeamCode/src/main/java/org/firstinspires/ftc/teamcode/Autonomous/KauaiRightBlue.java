@@ -10,7 +10,7 @@ import org.firstinspires.ftc.teamcode.Luke.Suggestions.xBotRobot;
  * Created by emmab on 11/6/2017.
  */
 @Autonomous (name = "kauai RB", group = "Kauai")
-@Disabled
+
 public class KauaiRightBlue extends LinearOpMode {
 
     xBotRobot robot = new xBotRobot();

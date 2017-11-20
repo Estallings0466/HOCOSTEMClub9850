@@ -34,18 +34,19 @@ public class NewLeftBlue extends LinearOpMode {
                 /* Found an instance of the template.  */
             if (vuMark == RelicRecoveryVuMark.LEFT) {
                 telemetry.addData("VuMark", "%s visible", vuMark);
-                telemetry.update();
-
+                sleep(1000);
+                robot.closeClaw(1);
+                Thread.sleep(500);
+                robot.liftGlyph(.5);
+                Thread.sleep(500);
                 robot.lowerLeftArm();
+                Thread.sleep(1000);
                 if (robot.isRedLeft()) {
                     robot.closeClaw(.5);
                     Thread.sleep(1000);
                     robot.driveForward(.5);
                     Thread.sleep(500);
                     robot.raiseArms();
-                    robot.liftGlyph(1);
-                    Thread.sleep(1000);
-                    robot.driveForward(.2);
                     Thread.sleep(500);
                     robot.turnLeft(.3);
                     robot.driveForward(.4);
@@ -75,12 +76,21 @@ public class NewLeftBlue extends LinearOpMode {
                     Thread.sleep(1000);
 
                 }
+                robot.raiseArms();
+                Thread.sleep(500);
                 stop();
 
             } else if (vuMark == RelicRecoveryVuMark.RIGHT) {
                  /* Found an instance of the template. The following is for CENTER or UNKNOWN. */
                 telemetry.addData("VuMark", "%s visible", vuMark);
                 telemetry.update();
+                sleep(1000);
+                robot.closeClaw(1);
+                Thread.sleep(500);
+                robot.liftGlyph(.5);
+                Thread.sleep(500);
+                robot.lowerLeftArm();
+                Thread.sleep(1000);
                 if (robot.isRedLeft()) {
                     robot.closeClaw(.5);
                     Thread.sleep(1000);
@@ -119,12 +129,19 @@ public class NewLeftBlue extends LinearOpMode {
                     Thread.sleep(1000);
 
                 }
+                robot.raiseArms();
+                Thread.sleep(500);
                 stop();
 
             } else {
                 telemetry.addData("VuMark", "%s visible", vuMark);
-
+                sleep(1000);
+                robot.closeClaw(1);
+                Thread.sleep(500);
+                robot.liftGlyph(.5);
+                Thread.sleep(500);
                 robot.lowerLeftArm();
+                Thread.sleep(1000);
                 sleep(1000);
                 if (robot.isRedLeft()) {
                     robot.closeClaw(.5);
@@ -164,6 +181,8 @@ public class NewLeftBlue extends LinearOpMode {
                     Thread.sleep(1000);
 
                 }
+                robot.raiseArms();
+                Thread.sleep(500);
                 stop();
 
             }

@@ -105,16 +105,22 @@ public class xBotRobot
         LJewel_Arm.setPosition(1);
         LColor_Sensor.enableLed(true);
         RColor_Sensor.enableLed(true);
+
         // Set all motors to run without encoders.
-        // No encoders on our motors to my knowledge - Luke Sullivan
+
         // May want to use RUN_USING_ENCODERS if encoders are installed.
-       // leftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-       // rightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+      /*  Back_Left.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        Back_Right.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        Front_Left.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        Front_Right.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        // Define and initialize ALL installed servos.
+        Back_Left.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        Back_Right.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        Front_Left.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+*/
 
 
-
+// Define and initialize ALL installed servos.
 
 
         // Define and initialize ALL other sensors.
@@ -265,8 +271,7 @@ public class xBotRobot
 
     public void closeClaw(double speed) throws InterruptedException {
         Glyph_Claw.setPower(-speed);
-        Thread.sleep(1000);
-        Glyph_Claw.setPower(0);
+
     }
 
     public void openClaw(double speed) throws InterruptedException{
@@ -298,7 +303,7 @@ public class xBotRobot
 
     public boolean isRedLeft() throws InterruptedException {
         //Thread.sleep(2000);
-        if (LColor_Sensor.red() >= 0 && LColor_Sensor.blue() == 0) {
+        if (LColor_Sensor.red() >= 2) {
             return true;
         } else
         {

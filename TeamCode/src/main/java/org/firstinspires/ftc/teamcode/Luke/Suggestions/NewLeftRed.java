@@ -82,6 +82,8 @@ xBotRobot robot = new xBotRobot();
                     stop();
 
                 }
+                robot.raiseArms();
+                Thread.sleep(500);
                 stop();
             }
         }

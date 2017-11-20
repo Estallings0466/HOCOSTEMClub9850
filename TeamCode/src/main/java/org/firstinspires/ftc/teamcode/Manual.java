@@ -56,7 +56,8 @@ public class Manual extends OpMode {
         //These work without reversing (Tetrix motors).
         //AndyMark motors may be opposite, in which case uncomment these lines:
         LJewel_Arm.setPosition(1);
-        RJewel_Arm.setPosition(1);
+        RJewel_Arm.setPosition(
+                1);
     }
 
     @Override
@@ -71,6 +72,7 @@ public class Manual extends OpMode {
         float gamepad1RightX = gamepad1.right_stick_x;
         float GlyphLift = gamepad2.left_stick_y;
         float GlyphClaw = gamepad2.right_stick_y;
+       //float JewelArm = gamepad1.left_trigger;
 
 
         // holonomic formulas
@@ -93,6 +95,8 @@ public class Manual extends OpMode {
         Back_Right.setPower(BackRight);
         Glyph_Claw.setPower(GlyphClaw);
         Glyph_Lift.setPower(GlyphLift);
+       // RJewel_Arm.setPosition(JewelArm);
+       // LJewel_Arm.setPosition(JewelArm);
 
 
 

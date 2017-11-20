@@ -10,7 +10,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 import org.firstinspires.ftc.teamcode.Luke.Suggestions.xBotRobot;
 
 @Autonomous (name = "Kauai LB", group = "Kauai")
-@Disabled
+
 public class KauaiLeftBlue extends LinearOpMode {
 
     xBotRobot robot = new xBotRobot();
@@ -21,21 +21,25 @@ public class KauaiLeftBlue extends LinearOpMode {
         telemetry.update();
 
         robot.init(hardwareMap);
-        //patiently waiting
+        //
         waitForStart();
-
         while (opModeIsActive()) {
             robot.closeClaw(.5);
             Thread.sleep(1000);
+
             robot.liftGlyph(1);
             Thread.sleep(1000);
+
             robot.driveForward(.2);
             Thread.sleep(500);
+
             robot.turnLeft(.3);
             robot.driveForward(.4);
             Thread.sleep(1000);
+
             robot.openClaw(1);
             Thread.sleep(1000);
+
             robot.driveBackward(.1);
             stop();
 
